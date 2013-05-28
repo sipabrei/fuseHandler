@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<product xmlns="http://www.example.org/MainProductSchema">
+<name>test</name>
+<provider>hersteller</provider>
+<supplier>sup1</supplier>
+<product-supplier-id>12d351</product-supplier-id>
+<price>12.99</price>
+<image>http://www.blub.tv/blub.jpg</image>
+<computer>
+<desktop>
+<ram>2GB</ram>
+<cpu>2.8GHz</cpu>
+<mainboard>blablub</mainboard>
+<graphic>BLAKA</graphic>
+</desktop>
+</computer>
+</product>

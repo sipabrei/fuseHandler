@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.example.org/SearchSchema"
+	xmlns:tns="http://www.example.org/SearchSchema" elementFormDefault="qualified">
+	<xsd:element name="search">
+		<xsd:element name="term" type="xsd:termTyp" />
+		<xsd:simpleType name="termTyp">
+			<xsd:restriction base="xsd:string">
+				<xsd:pattern value="^[\w \s -]+$" />
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+</schema>

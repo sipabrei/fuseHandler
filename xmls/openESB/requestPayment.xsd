@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.example.org/MainProductSchema"
+	xmlns:tns="http://www.example.org/MainProductSchema"
+	elementFormDefault="qualified">
+	<xsd:complexType name="requestPayment">
+        <xsd:sequence>
+            <xsd:element name="personality">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="firstname" type="xsd:string"/>
+                        <xsd:element name="lastname" type="xsd:string"/>
+                        <xsd:element name="address" type="xsd:string"/>
+                        <xsd:element name="zipcode" type="xsd:unsignedInt"/>
+                        <xsd:element name="city" type="xsd:string"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="billing">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="accountnumber" type="xsd:unsignedInt"/>
+                        <xsd:element name="bankcode" type="xsd:unsignedInt"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="object">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="name" type="xsd:string"/>
+                        <xsd:element name="quantitiy" type="xsd:unsignedInt"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+        </xsd:sequence>
+    </xsd:complexType>
+</schema>

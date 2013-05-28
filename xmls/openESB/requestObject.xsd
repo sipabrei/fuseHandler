@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.example.org/MainProductSchema"
+	xmlns:tns="http://www.example.org/MainProductSchema"
+	elementFormDefault="qualified">
+	<xsd:complexType name="requestObject">
+        <xsd:choice>
+            <xsd:element name="mainGroup" type="xsd:string"/>
+            <xsd:element name="subGroup" type="xsd:string"/>
+            <xsd:element name="objectName" type="xsd:string"/>
+            <xsd:element name="requestType" type="xsd:string"/>
+        </xsd:choice>
+    </xsd:complexType>
+</schema>
