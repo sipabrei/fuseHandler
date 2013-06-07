@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:camel="http://camel.apache.org/schema/spring"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+       http://camel.apache.org/schema/spring http://camel.apache.org/schema/spring/camel-spring.xsd">
+
+  <camelContext trace="false" xmlns="http://camel.apache.org/schema/spring">
+    <route>
+        <from uri="file:src/data/search?noop=true"/>
+        <process ref="SearchReader"/>
+        <setBody>
+            <simple>INSERT INTO searchterms (term, date) VALUES ('${header.term}', '${header.date}');</simple>
+        </setBody>
+        <to uri="jdbc:dataSource"/>
+        <!-- <to uri="xmldb:myeXist" />-->
+        <to uri="xmldb:exist://193.174.103.82:8080/exist/servlet/db/fuse/handler.xml" />
+        <log message="${body}" />
+        <log message="*** save with ${header.term} on ${header.date}"/>
+    </route>
+</camelContext>
+
+<!-- <bean id="eXistDB" class="de.mariospitze.fuse.tests.test1.RemoteExistDatabase">
+</bean>
+
+<bean id="myeXist" class="org.apacheextras.camel.component.exist.ExistComponent">
+	<property name="database" value="eXistDB" />
+</bean> -->
+
+<bean id="dataSource" class="org.springframework.jdbc.datasource.SimpleDriverDataSource">
+        <property name="driverClass" value="org.postgresql.Driver"/>
+        <property name="url" value="jdbc:postgresql://127.0.0.1/fuse"/>
+        <property name="username" value="fuse"/>
+        <property name="password" value="fuse"/>
+    </bean>
+    <bean id="SearchReader"
+class="de.mariospitze.fuse.tests.test1.SearchReader"/> 
+</beans>
