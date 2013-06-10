@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<articelList>
+	<articel name="computer1" category="computer">
+		<price>08,15</price>
+		<text>Prozessor schnell</text>
+	</articel>
+	<articel name="computer2" category="computer">
+		<price>98,15</price>
+		<text>Prozessor ganz schnell</text>
+	</articel>
+	<articel name="buch2" category="book">
+		<price>98,15</price>
+		<text>toll zum lesen</text>
+	</articel>
+</articelList>

@@ -20,13 +20,6 @@
     </route>
 </camelContext>
 
-<!-- <bean id="eXistDB" class="de.mariospitze.fuse.tests.test1.RemoteExistDatabase">
-</bean>
-
-<bean id="myeXist" class="org.apacheextras.camel.component.exist.ExistComponent">
-	<property name="database" value="eXistDB" />
-</bean> -->
-
 <bean id="dataSource" class="org.springframework.jdbc.datasource.SimpleDriverDataSource">
         <property name="driverClass" value="org.postgresql.Driver"/>
         <property name="url" value="jdbc:postgresql://127.0.0.1/fuse"/>
