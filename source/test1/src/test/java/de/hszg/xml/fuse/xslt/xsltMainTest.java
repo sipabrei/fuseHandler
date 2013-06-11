@@ -32,7 +32,7 @@ public class xsltMainTest{
 		      new StreamSource(ClassLoader.getSystemResource("de/hszg/xml/fuse/xslt/MainProduct.xsl").toString()) );
 		transformer.transform( xmlFile, result );
 		XMLOutputter xmlOutputter = new XMLOutputter();
-		//xmlOutputter.output( doc, System.out );
+		  //xmlOutputter.output( doc, System.out );
 		xmlOutputter.output( result.getDocument(), System.out );
 
 	}
