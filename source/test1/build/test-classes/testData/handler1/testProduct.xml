@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<articel Name="computer1" Category="computer">
-	<price>08,15</price>
-	<text>Prozessor schnell</text>
-	<picture>www.example.de/buch.jpg</picture>
-	<processor>intel</processor>
-	<graphik>nvidia</graphik>
-</articel>
