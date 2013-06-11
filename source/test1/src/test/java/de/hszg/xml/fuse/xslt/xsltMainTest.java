@@ -24,7 +24,7 @@ public class xsltMainTest{
 	@Test
 	public void MainProductTest() throws IOException, TransformerFactoryConfigurationError, JDOMException, TransformerException {
 		org.jdom.Document doc = new SAXBuilder()
-				.build(ClassLoader.getSystemResource("testRouts/Handler1Test1.xml").toString() );
+				.build(ClassLoader.getSystemResource("testData/handler1/Handler1Test1.xml").toString() );
 		JDOMSource     xmlFile    = new JDOMSource( doc );
 		JDOMResult result = new JDOMResult();
 		Transformer transformer =
