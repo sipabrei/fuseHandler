@@ -1,6 +1,8 @@
 package de.hszg.xml.fuse.xslt;
 
 import java.io.IOException;
+import java.net.URL;
+import java.util.Enumeration;
 
 import javax.xml.transform.Transformer;
 import javax.xml.transform.TransformerException;
@@ -21,20 +23,17 @@ public class xsltMainTest{
 	
 	@Test
 	public void MainProductTest() throws IOException, TransformerFactoryConfigurationError, JDOMException, TransformerException {
-		
-		//System.out.println(this.getClass().getResource("/src/test/resources/testRouts/Handler1Test1.xml").toString());
-		
-//		org.jdom.Document doc = new SAXBuilder()
-//				.build(ClassLoader.getSystemResource("/src/test/resources/testRouts/Handler1Test1.xml").toString() );
-//		JDOMSource     xmlFile    = new JDOMSource( doc );
-//		JDOMResult result = new JDOMResult();
-//		Transformer transformer =
-//		   TransformerFactory.newInstance().newTransformer(
-//		      new StreamSource(Handler1ProcessorMain.class.getResource("/src/main/resources/xml/xslt/MainProduct.xsl").toString()) );
-//		transformer.transform( xmlFile, result );
-//		XMLOutputter xmlOutputter = new XMLOutputter();
-//		xmlOutputter.output( doc, System.out );
-//		xmlOutputter.output( result.getDocument(), System.out );
+		org.jdom.Document doc = new SAXBuilder()
+				.build(ClassLoader.getSystemResource("testRouts/Handler1Test1.xml").toString() );
+		JDOMSource     xmlFile    = new JDOMSource( doc );
+		JDOMResult result = new JDOMResult();
+		Transformer transformer =
+		   TransformerFactory.newInstance().newTransformer(
+		      new StreamSource(ClassLoader.getSystemResource("de/hszg/xml/fuse/xslt/MainProduct.xsl").toString()) );
+		transformer.transform( xmlFile, result );
+		XMLOutputter xmlOutputter = new XMLOutputter();
+		xmlOutputter.output( doc, System.out );
+		xmlOutputter.output( result.getDocument(), System.out );
 
 	}
 }

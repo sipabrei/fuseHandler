@@ -187,7 +187,8 @@
 	</dependencies>
 
 	<build>
-		<defaultGoal>install</defaultGoal>
+		<defaultGoal>package</defaultGoal>
+		<directory>${basedir}/build</directory>
 
 		<plugins>
 			<plugin>
