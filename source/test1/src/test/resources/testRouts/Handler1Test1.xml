@@ -9,7 +9,7 @@
 
 	<camelContext trace="false" xmlns="http://camel.apache.org/schema/spring">
     <route>
-        <from uri="file:src/data/handler1?noop=true"/>
+        <from uri="file:src/test/testData/handler1?noop=true"/>
         <split>
             <xpath>//articelList/articel</xpath>
             <choice>
