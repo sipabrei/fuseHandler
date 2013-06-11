@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<articelList>
+	<articel name="computer1" category="computer">
+		<price>08,15</price>
+		<text>Prozessor schnell</text>
+		<picture>www.example.de/buch.jpg</picture>
+		<processor>intel</processor>
+		<graphik>nvidia</graphik>
+	</articel>
+	<articel name="computer2" category="computer">
+		<price>98,15</price>
+		<text>Prozessor ganz schnell</text>
+		<picture>www.example.de/buch.jpg</picture>
+		<processor>amd</processor>
+		<graphik>ati</graphik>
+	</articel>
+	<articel name="buch2" category="book">
+		<price>98,15</price>
+		<text>toll zum lesen</text>
+		<picture>www.example.de/buch.jpg</picture>
+		<author>Klaus Neumann</author>
+		<isbn>978-3-86680-192-9</isbn>
+	</articel>
+</articelList>
