@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+    targetNamespace="http://xml.netbeans.org/schema/response_search"
+    xmlns:tns="http://xml.netbeans.org/schema/response_search"
+    elementFormDefault="qualified">
+    <xsd:complexType name="results">
+        <xsd:sequence>
+            <xsd:element name="result" minOccurs="0" maxOccurs="unbounded">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="maingroup">
+                            <xsd:complexType>
+                                <xsd:sequence>
+                                    <xsd:element name="subgroup">
+                                        <xsd:complexType>
+                                            <xsd:sequence>
+                                                <xsd:element name="product">
+                                                    <xsd:complexType>
+                                                        <xsd:sequence>
+                                                            <xsd:element name="pic" type="xsd:string"/>
+                                                            <xsd:element name="price" type="xsd:string"/>
+                                                            <xsd:element name="description" type="xsd:string"/>
+                                                            <xsd:element name="quantity" type="xsd:unsignedInt"/>
+                                                            <xsd:element name="attributes">
+                                                                <xsd:complexType>
+                                                                    <xsd:sequence>
+                                                                        <xsd:element name="attribute" minOccurs="0" maxOccurs="unbounded">
+                                                                            <xsd:complexType>
+                                                                                <xsd:sequence>
+                                                                                    <xsd:element name="attributetype" type="xsd:string"/>
+                                                                                    <xsd:element name="attributecontent" type="xsd:string"/>
+                                                                                </xsd:sequence>
+                                                                            </xsd:complexType>
+                                                                        </xsd:element>
+                                                                    </xsd:sequence>
+                                                                </xsd:complexType>
+                                                            </xsd:element>
+                                                        </xsd:sequence>
+                                                        <xsd:attribute name="id" type="xsd:string"/>
+                                                    </xsd:complexType>
+                                                </xsd:element>
+                                            </xsd:sequence>
+                                            <xsd:attribute name="name" type="xsd:string"/>
+                                        </xsd:complexType>
+                                    </xsd:element>
+                                </xsd:sequence>
+                                <xsd:attribute name="name" type="xsd:string"/>
+                            </xsd:complexType>
+                        </xsd:element>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:element name="root">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="results" type="tns:results"/>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+</xsd:schema>
