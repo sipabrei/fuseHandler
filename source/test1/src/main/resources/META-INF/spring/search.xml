@@ -13,8 +13,6 @@
             <simple>INSERT INTO searchterms (term, date) VALUES ('${header.term}', '${header.date}');</simple>
         </setBody>
         <to uri="jdbc:dataSource"/>
-        <!-- <to uri="xmldb:myeXist" />-->
-        <to uri="xmldb:exist://193.174.103.82:8080/exist/servlet/db/fuse/handler.xml" />
         <log message="${body}" />
         <log message="*** save with ${header.term} on ${header.date}"/>
     </route>
