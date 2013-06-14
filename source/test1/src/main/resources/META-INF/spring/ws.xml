@@ -10,7 +10,7 @@ http://camel.apache.org/schema/cxf http://camel.apache.org/schema/cxf/camel-cxf.
 
 	<bean id="loggingOutInterceptor" class="org.apache.cxf.interceptor.LoggingOutInterceptor" />
 	<bean id="loggingInInterceptor" class="org.apache.cxf.interceptor.LoggingInInterceptor" />
-
+	<bean id="CsvProcessor" class="de.hszg.csv.fuse.processor.CsvProcessor" />
 	<bean id="dataSource"
 		class="org.springframework.jdbc.datasource.SimpleDriverDataSource">
 		<property name="driverClass" value="org.postgresql.Driver" />
@@ -39,6 +39,7 @@ http://camel.apache.org/schema/cxf http://camel.apache.org/schema/cxf/camel-cxf.
 			<setHeader headerName="term">
 				<simple>${body}</simple>
 			</setHeader>
+			<process ref="CsvProcessor" />
 			<setBody>
 				<simple>INSERT INTO searchterms (term) VALUES ('${body}');</simple>
 			</setBody>
