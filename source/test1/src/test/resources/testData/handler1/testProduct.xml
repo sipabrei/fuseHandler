@@ -2,17 +2,46 @@
 <ns1:root xmlns:ns1="http://xml.netbeans.org/schema/response_search" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xml.netbeans.org/schema/response_search response_search.xsd">
  
 <ns1:result>
-	<ns1:maingroup name="Spielwaren">
-		<ns1:subgroup name="Barbie">
-			<ns1:product id="barbie_1">
-				<ns1:pic>http:www.blub/test.img</ns1:pic>
-				<ns1:price>8.99</ns1:price>
-				<ns1:description>Mattel W2921-Barbie Ballerina Prinzessin,rosa,Puppe</ns1:description>
-				<ns1:quantity>118</ns1:quantity>
-				<ns1:attributes />
-			</ns1:product>
-		</ns1:subgroup>
-	</ns1:maingroup>
-</ns1:result>
+      <ns1:maingroup name="Spielwaren">
+        <ns1:subgroup name="Plüschtiere">
+          <ns1:product id="pl_2">
+            <ns1:pic />
+            <ns1:price>11.98</ns1:price>
+            <ns1:description>Nici 33500 - Schmusetier Bär Taps 25 cm</ns1:description>
+            <ns1:quantity>28</ns1:quantity>
+            <ns1:attributes>
+              <ns1:attribute>
+                <ns1:attributetype>Artikelgruppe</ns1:attributetype>
+                <ns1:attributecontent>Plüsch und Stoff: Tier</ns1:attributecontent>
+              </ns1:attribute>
+              <ns1:attribute>
+                <ns1:attributetype>Farbe Plüschtiere</ns1:attributetype>
+                <ns1:attributecontent>mehrfarbig</ns1:attributecontent>
+              </ns1:attribute>
+              <ns1:attribute>
+                <ns1:attributetype>Geschlecht</ns1:attributetype>
+                <ns1:attributecontent>Mädchen und Jungen</ns1:attributecontent>
+              </ns1:attribute>
+              <ns1:attribute>
+                <ns1:attributetype>Größe Stoff</ns1:attributetype>
+                <ns1:attributecontent>25 cm</ns1:attributecontent>
+              </ns1:attribute>
+              <ns1:attribute>
+                <ns1:attributetype>Körperhaltung Plüschtiere</ns1:attributetype>
+                <ns1:attributecontent>Sitzend</ns1:attributecontent>
+              </ns1:attribute>
+              <ns1:attribute>
+                <ns1:attributetype>Tierart</ns1:attributetype>
+                <ns1:attributecontent>Bär</ns1:attributecontent>
+              </ns1:attribute>
+              <ns1:attribute>
+                <ns1:attributetype>Zielgruppe</ns1:attributetype>
+                <ns1:attributecontent>Kleinkind</ns1:attributecontent>
+              </ns1:attribute>
+            </ns1:attributes>
+          </ns1:product>
+        </ns1:subgroup>
+      </ns1:maingroup>
+    </ns1:result>
 
 </ns1:root>
