@@ -3,10 +3,6 @@ package de.mariospitze.fuse.tests.test1;
 public class SearchRequest {
 
 	public String search(String term){
-		term = "\"ID\",\"Product\",\"Amount\",\"Details\""+
-				"\"1\",\"Apple MacBook\",\"40\",\"Notebook: 11,6 inches, Intel Core i5 2.4GHz, 4GB Ram, 500GB HDD\""+
-				"\"2\",\"Apple MacBook\",\"10\",\"Notebook: 15,6 inches, Intel Core i7 2.4GHz, 8GB Ram, 500GB HDD\""+
-				"\"3\",\"Asus PU500\",\"40\",\"Notebook: 11,6 inches, Intel Core i3 2.4GHz, 2GB Ram, 500GB HDD\";";
 		return term;
 	}
 	
