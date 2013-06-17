@@ -14,9 +14,9 @@ http://camel.apache.org/schema/cxf http://camel.apache.org/schema/cxf/camel-cxf.
 	<bean id="dataSource"
 		class="org.springframework.jdbc.datasource.SimpleDriverDataSource">
 		<property name="driverClass" value="org.postgresql.Driver" />
-		<property name="url" value="jdbc:postgresql://127.0.0.1/fuse" />
-		<property name="username" value="fuse" />
-		<property name="password" value="fuse" />
+		<property name="url" value="jdbc:postgresql://193.174.103.82/fuseDB" />
+		<property name="username" value="fuseUser" />
+		<property name="password" value="jMs4uqzymhHz" />
 	</bean>
 
 	<cxf:cxfEndpoint id="search" address="http://localhost:9090/search"
