@@ -29,7 +29,7 @@ public class xsltMainTest{
 		JDOMResult result = new JDOMResult();
 		Transformer transformer =
 		   TransformerFactory.newInstance().newTransformer(
-		      new StreamSource(ClassLoader.getSystemResource("de/hszg/xml/fuse/xslt/MainProduct.xsl").toString()) );
+		      new StreamSource(ClassLoader.getSystemResource("de/hszg/xml/fuse/xslt/PlüschtiereProduct.xsl").toString()) );
 		transformer.transform( xmlFile, result );
 		XMLOutputter xmlOutputter = new XMLOutputter();
 		  //xmlOutputter.output( doc, System.out );
