@@ -1,8 +1,6 @@
 package de.hszg.xml.fuse.xslt;
 
 import java.io.IOException;
-import java.net.URL;
-import java.util.Enumeration;
 
 import javax.xml.transform.Transformer;
 import javax.xml.transform.TransformerException;
@@ -16,8 +14,6 @@ import org.jdom.output.XMLOutputter;
 import org.jdom.transform.JDOMResult;
 import org.jdom.transform.JDOMSource;
 import org.junit.Test;
-
-import de.hszg.xml.fuse.processor.Handler1ProcessorMain;
 
 public class xsltMainTest{
 	

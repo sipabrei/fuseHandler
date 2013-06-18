@@ -30,8 +30,10 @@ public abstract class Handler1ProcessorMain implements Processor {
 		JDOMSource xmlFile = new JDOMSource(doc);
 		JDOMResult result = new JDOMResult();
 		this.getClass().getClassLoader();
+		TransformerFactory newInstance = TransformerFactory.newInstance();
+		newInstance.setURIResolver(new XsltURIResolver());
 		Transformer transformer =
-				   TransformerFactory.newInstance().newTransformer(
+				   newInstance.newTransformer(
 				      new StreamSource(this.getClass().getClassLoader().getResourceAsStream(resource)));
 		transformer.transform(xmlFile, result);
 		XMLOutputter xmlOutputter = new XMLOutputter();
