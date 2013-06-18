@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:camel="http://camel.apache.org/schema/spring" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:ns1="http://xml.netbeans.org/schema/response_search"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+       http://camel.apache.org/schema/spring http://camel.apache.org/schema/spring/camel-spring.xsd">
+
+<bean id="handler1ProcessorPlueschtier" class="de.hszg.xml.fuse.processor.Handler1ProcessorPlueschtier"/>
+<bean id="handler1ProcessorBook" class="de.hszg.xml.fuse.processor.Handler1ProcessorBook"/>
+
+	<camelContext trace="false" xmlns="http://camel.apache.org/schema/spring">
+    <route>
+        <from uri="file:src/test/resources/testData/handler1/ordner?noop=true"/>
+        <split>
+            <xpath>ns1:root/ns1:results/ns1:result</xpath>
+            <choice>
+                <when>
+                    <xpath>//ns1:result/ns1:maingroup[@name='Spielwaren']</xpath>
+                    <process ref="handler1ProcessorPlueschtier"/>
+                    <log message="${body}"/>
+                </when>
+                <when>
+                    <xpath>//articel[@category='book']</xpath>
+                    <process ref="handler1ProcessorBook"/>
+                </when>
+                <otherwise>
+                	<log message="nicht erkannt: ${body}" />
+                </otherwise>
+            </choice>
+        </split>
+        <log message="${body}" />
+    </route>
+</camelContext>
+
+</beans>

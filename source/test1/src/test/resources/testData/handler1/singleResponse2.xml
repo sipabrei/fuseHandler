@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<ns1:root xmlns:ns1="http://xml.netbeans.org/schema/response_search" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xml.netbeans.org/schema/response_search response_search.xsd">
+<ns1:root xmlns:ns1="http://xml.netbeans.org/schema/response_search"
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xml.netbeans.org/schema/response_search response_search.xsd">
   <ns1:results>
     <ns1:result>
       <ns1:maingroup name="Spielwaren">

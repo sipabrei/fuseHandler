@@ -1,15 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-       xmlns:camel="http://camel.apache.org/schema/spring"
-       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+	xmlns:camel="http://camel.apache.org/schema/spring" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
        http://camel.apache.org/schema/spring http://camel.apache.org/schema/spring/camel-spring.xsd">
 
-  <camelContext trace="false" xmlns="http://camel.apache.org/schema/spring">
-    <route>
-        <from uri="direct:start"/>
-        <log message="laeuft"/>
-    </route>
-</camelContext>
+	<bean id="dataSource" class="de.hszg.xml.fuse.exist.ExistComponent">
+		<property name="username" value="fuseUser" />
+		<property name="password" value="jMs4uqzymhHz" />
+	</bean>
+
+	<camelContext trace="false"
+		xmlns="http://camel.apache.org/schema/spring">
+		<route autoStartup="true">
+			<from uri="timer://existTimer?repeatCount=1" />
+			<setBody>
+				<simple>text</simple>
+			</setBody>
+			<log message="laeuft" />
+			<to uri="bean:dataSource" />
+		</route>
+	</camelContext>
 
 </beans>
