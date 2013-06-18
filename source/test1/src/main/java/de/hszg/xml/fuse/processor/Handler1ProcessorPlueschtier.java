@@ -10,10 +10,11 @@ public class Handler1ProcessorPlueschtier extends Handler1ProcessorMain {
 		
 		System.out.println("processor");
 		
-		DeferredElementNSImpl doc = (DeferredElementNSImpl) exchange.getIn().getBody();
-		System.out.println("ausgabe\n" + doc.toString());
-		exchange.getOut().setBody(mainConvert(doc.toString(), 
-				"de/hszg/xml/fuse/xslt/PlüschtiereProduct.xsl"));
+//		DeferredElementNSImpl doc = (DeferredElementNSImpl) exchange.getIn().getBody();
+//		System.out.println("ausgabe\n" + doc.toString());
+		String message = exchange.getIn().getBody(String.class);
+		exchange.getOut().setBody(mainConvert(message, 
+				"de/hszg/xml/fuse/xslt/PlueschtiereProduct.xsl"));
 
 	}
 
