@@ -24,12 +24,12 @@ public class xsltMainTest{
 	@Test
 	public void MainProductTest() throws IOException, TransformerFactoryConfigurationError, JDOMException, TransformerException {
 		org.jdom.Document doc = new SAXBuilder()
-				.build(ClassLoader.getSystemResource("testData/handler1/testProduct.xml").toString() );
+				.build(ClassLoader.getSystemResource("testData/handler1/singleResponse2.xml").toString() );
 		JDOMSource     xmlFile    = new JDOMSource( doc );
 		JDOMResult result = new JDOMResult();
 		Transformer transformer =
 		   TransformerFactory.newInstance().newTransformer(
-		      new StreamSource(ClassLoader.getSystemResource("de/hszg/xml/fuse/xslt/PlüschtiereProduct.xsl").toString()) );
+		      new StreamSource(ClassLoader.getSystemResource("de/hszg/xml/fuse/xslt/PlueschtiereProduct.xsl").toString()) );
 		transformer.transform( xmlFile, result );
 		XMLOutputter xmlOutputter = new XMLOutputter();
 		  //xmlOutputter.output( doc, System.out );
