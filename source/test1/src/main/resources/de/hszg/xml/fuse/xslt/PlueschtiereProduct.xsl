@@ -5,6 +5,9 @@
 	<xsl:import href="MainProduct.xsl" />
 
 	<xsl:template match="ns1:attribute">
+		<xsl:template match="ns1:attributes">
+			<xsl:apply-templates />
+		</xsl:template>
 		<xsl:variable name="attributetype">
 			<xsl:value-of select="ns1:attributetype" />
 		</xsl:variable>

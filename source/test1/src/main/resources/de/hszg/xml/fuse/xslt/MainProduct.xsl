@@ -46,10 +46,6 @@
 			<xsl:value-of select="." />
 		</description>
 	</xsl:template>
-	<xsl:template match="ns1:attributes">
-		<xsl:apply-templates />
-	</xsl:template>
-
 	<xsl:template match="node()">
 	</xsl:template>
 </xsl:stylesheet> 
