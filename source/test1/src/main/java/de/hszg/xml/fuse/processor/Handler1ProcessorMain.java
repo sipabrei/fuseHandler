@@ -29,9 +29,10 @@ public abstract class Handler1ProcessorMain implements Processor {
 		org.jdom.Document doc = new SAXBuilder().build(new StringReader(oldXML));
 		JDOMSource xmlFile = new JDOMSource(doc);
 		JDOMResult result = new JDOMResult();
+		this.getClass().getClassLoader();
 		Transformer transformer =
 				   TransformerFactory.newInstance().newTransformer(
-				      new StreamSource(ClassLoader.getSystemResource("de/hszg/xml/fuse/xslt/PlueschtiereProduct.xsl").toString()) );
+				      new StreamSource(this.getClass().getClassLoader().getResourceAsStream(resource)));
 		transformer.transform(xmlFile, result);
 		XMLOutputter xmlOutputter = new XMLOutputter();
 		xmlOutputter.output(result.getDocument(), System.out);
