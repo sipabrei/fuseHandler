@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:camel="http://camel.apache.org/schema/spring" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:ns1="http://xml.netbeans.org/schema/response_search"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+       http://camel.apache.org/schema/spring http://camel.apache.org/schema/spring/camel-spring.xsd">
+
+	<bean id="handler1ContentSeperator" class="de.hszg.xml.fuse.processor.Handler1ContentSeperator" />
+
+	<bean id="projectPropertyConfigurer"
+		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="location">
+			<value>classpath:/de/hszg/xml/fuse/accounts/postgres.properties
+			</value>
+		</property>
+	</bean>
+
+	<bean id="dataSource"
+		class="org.springframework.jdbc.datasource.SimpleDriverDataSource">
+		<property name="driverClass" value="org.postgresql.Driver" />
+		<property name="url"
+			value="jdbc:postgresql://${postgres.hostname}/${postgres.db}" />
+		<property name="username" value="${postgres.user}" />
+		<property name="password" value="${postgres.password}" />
+	</bean>
+
+	<camelContext xmlns="http://camel.apache.org/schema/spring"
+		trace="false">
+		<route>
+			<from
+				uri="file:src/test/resources/testData/handler1?fileName=completeResponse.xml&amp;noop=true" />
+
+			<split>
+				<xpath>ns1:root/ns1:results/ns1:result</xpath>
+
+				<process ref="handler1ContentSeperator" />
+
+				<setBody>
+					<simple>INSERT INTO products (id, "group", subgroup, description) SELECT '${header.id}', '${header.group}', '${header.subgroup}', '${header.description}' WHERE NOT EXISTS (SELECT 1 FROM products WHERE id='${header.id}');</simple>
+				</setBody>
+
+				<to uri="jdbc:dataSource" />
+			</split>
+		</route>
+	</camelContext>
+
+</beans>
