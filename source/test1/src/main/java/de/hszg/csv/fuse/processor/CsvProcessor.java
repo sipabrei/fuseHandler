@@ -10,6 +10,6 @@ public class CsvProcessor implements Processor {
 	public void process(Exchange exchange) throws Exception {
 		String exchangeBody = exchange.getIn().getBody().toString();
 		
-		parser.convertFile(exchangeBody, xmlFileName, ",");
+		parser.convertFile(exchangeBody, xmlFileName, ";");
 	}
 }
