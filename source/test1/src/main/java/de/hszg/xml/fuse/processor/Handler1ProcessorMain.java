@@ -22,10 +22,7 @@ import com.sun.org.apache.xerces.internal.dom.DeferredElementNSImpl;
 
 public abstract class Handler1ProcessorMain implements Processor {
 
-	protected String mainConvert(String oldXML, String resource) throws JDOMException, IOException, TransformerFactoryConfigurationError, TransformerException {
-		
-//		System.out.println("alte XML \n" + oldXML);
-		
+	protected String mainConvert(String oldXML, String resource) throws JDOMException, IOException, TransformerFactoryConfigurationError, TransformerException {		
 		org.jdom.Document doc = new SAXBuilder().build(new StringReader(oldXML));
 		JDOMSource xmlFile = new JDOMSource(doc);
 		JDOMResult result = new JDOMResult();
@@ -39,8 +36,6 @@ public abstract class Handler1ProcessorMain implements Processor {
 		XMLOutputter xmlOutputter = new XMLOutputter();
 		xmlOutputter.output(result.getDocument(), System.out);
 		return result.getDocument().toString();
-		
-//		return "";
 	}
 
 }

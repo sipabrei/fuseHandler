@@ -1,35 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <schema xmlns="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.example.org/MainProductSchema"
-	xmlns:tns="http://www.example.org/MainProductSchema"
-	elementFormDefault="qualified">
-	<xsd:element name="product">
-		<xsd:element name="group" type="groupTyp" />
-		<xsd:simpleType name="groupTyp">
-			<xs:attribute name="sub" type="xs:string" />
-		</xsd:simpleType>
-		<xsd:element name="name" type="xsd:string" />
-		<xsd:element name="provider" type="xsd:string" />
-		<xsd:element name="supplier" type="xsd:string" />
-		<xsd:element name="product-supplier-id" type="xsd:string" />
-		<xsd:element name="price" type="priceTyp" />
-		<xsd:simpleType name="priceTyp">
-			<xsd:restriction base="xsd:string">
-				<xsd:pattern value="[1-9]\d*.\d{2}|0.\d{2}" />
-			</xsd:restriction>
-		</xsd:simpleType>
-		<xsd:element name="image" type="imageTyp" />
-		<xsd:simpleType name="imageTyp">
-			<xsd:restriction base="xsd:string">
-				<xsd:pattern value="[^>]*[^/].(?:jpg|bmp|gif|png)" />
-			</xsd:restriction>
-		</xsd:simpleType>
-		<xsd:element name="description" type="xsd:string" />
-
-		<xs:choice>
-			<xs:element name="computer" type="computer-Type" />
-		</xs:choice>
-		<!-- IMPORTS -->
-		<!-- ---------- -->
-		<xs:include schemaLocation="Computer.xsd" />
-	</xsd:element>
+	xmlns:tns="http://www.example.org/MainProductSchema">
+	<element name="product" type="tns:productTyp"/>
+	<complexType name="productTyp">
+		<sequence>
+			<element name="name" type="string" />
+			<element name="provider" type="string" />
+			<element name="supplier" type="string" />
+			<element name="product-supplier-id" type="string" />
+			<element name="description" type="string" />
+			<element name="group" type="tns:groupDef" />
+			<element name="price" type="tns:priceTyp" />
+			<element name="image" type="anyURI" />
+		</sequence>
+	</complexType>
+	<simpleType name="priceTyp">
+		<restriction base="string">
+			<pattern value="[1-9]\d*.\d{2}|0.\d{2}" />
+		</restriction>
+	</simpleType>
+	<complexType name="groupDef">
+		<attribute name="sub" type="string" />
+	</complexType>
 </schema>

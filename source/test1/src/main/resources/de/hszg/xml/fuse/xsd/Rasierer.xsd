@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:n="http://www.example.org/MainProductSchema"
+	elementFormDefault="qualified">
+	<xsd:import namespace="http://www.example.org/MainProductSchema"
+		schemaLocation="MainProductSchema.xsd" />
+	<xsd:element name="product" type="product" />
+	<xsd:complexType name="product">
+		<xsd:complexContent>
+			<xsd:extension base="n:productTyp">
+				<xsd:sequence>
+					<xsd:element name="information" type="xsd:string" />
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+</xsd:schema>
