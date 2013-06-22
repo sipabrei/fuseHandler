@@ -10,49 +10,50 @@
 	<bean id="handler1ProcessorRasierer" class="de.hszg.xml.fuse.processor.Handler1ProcessorRasierer" />
 
 
-	<camelContext trace="false"
-		xmlns="http://camel.apache.org/schema/spring">
-		<route>
-			<from uri="file:src/test/resources/testData/handler1/ordner?noop=true" />
-			<from uri="file:src/test/resources/testData/handler1/ordner?noop=true" />
-			<split>
-				<xpath>ns1:root/ns1:results/ns1:result</xpath>
-				<choice>
-					<when>
-						<xpath>//ns1:result/ns1:maingroup[@name='Spielwaren']</xpath>
-						<choice>
-							<when>
-								<xpath>//ns1:result/ns1:maingroup/ns1:subgroup[@name='Barbie']</xpath>
-								<process ref="handler1ProcessorBarbie" />
-							</when>
-							<when>
-								<xpath>//ns1:result/ns1:maingroup/ns1:subgroup[@name='Plüschtiere']</xpath>
-								<process ref="handler1ProcessorPlueschtier" />
-							</when>
-							<otherwise>
-								<log message="nicht erkannt: ${body}" />
-							</otherwise>
-						</choice>
-					</when>
-					<when>
-						<xpath>//ns1:result/ns1:maingroup[@name='Hygieneartikel']</xpath>
-						<choice>
-							<when>
-								<xpath>//ns1:result/ns1:maingroup/ns1:subgroup[@name='Rasierer']</xpath>
-								<process ref="handler1ProcessorBarbie" />
-							</when>
-							<otherwise>
-								<log message="nicht erkannt: ${body}" />
-							</otherwise>
-						</choice>
-					</when>
-					<otherwise>
-						<log message="nicht erkannt: ${body}" />
-					</otherwise>
-				</choice>
-			</split>
-			<log message="${body}" />
-		</route>
-	</camelContext>
+	<camelContext trace="false" xmlns="http://camel.apache.org/schema/spring">
+    <route>
+        <from uri="file:src/test/resources/testData/handler1/ordner?noop=true"/>
+        <split>
+            <xpath>ns1:root/ns1:results/ns1:result</xpath>
+            <choice>
+                <when>
+                    <xpath>//ns1:result/ns1:maingroup[@name='Spielwaren']</xpath>
+                    <choice>
+                        <when>
+                            <xpath>//ns1:result/ns1:maingroup/ns1:subgroup[@name='Barbie']</xpath>
+                            <process ref="handler1ProcessorBarbie"/>
+                            <log message="${body}"/>
+                        </when>
+                        <when>
+                            <xpath>//ns1:result/ns1:maingroup/ns1:subgroup[@name='Plueschtiere']</xpath>
+                            <process ref="handler1ProcessorPlueschtier"/>
+                            <log message="${body}"/>
+                        </when>
+                        <otherwise>
+                            <log message="nicht erkannt: ${body}"/>
+                        </otherwise>
+                    </choice>
+                </when>
+                <when>
+                    <xpath>//ns1:result/ns1:maingroup[@name='Hygieneartikel']</xpath>
+                    <choice>
+                        <when>
+                            <xpath>//ns1:result/ns1:maingroup/ns1:subgroup[@name='Rasierer']</xpath>
+                            <process ref="handler1ProcessorRasierer"/>
+                            <log message="${body}"/>
+                        </when>
+                        <otherwise>
+                            <log message="nicht erkannt: ${body}"/>
+                        </otherwise>
+                    </choice>
+                </when>
+                <otherwise>
+                    <log message="nicht erkannt: ${body}"/>
+                </otherwise>
+            </choice>
+        </split>
+        <log message="${body}"/>
+    </route>
+</camelContext>
 
 </beans>
