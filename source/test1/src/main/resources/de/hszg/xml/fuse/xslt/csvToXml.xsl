@@ -3,9 +3,9 @@
 	xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:ns1="http://xml.netbeans.org/schema/response_search"
 	xmlns="http://www.example.org/MainProductSchema.xsd">
 	<xsl:template match="/">
-		<root>
+		<products>
 			<xsl:apply-templates />
-		</root>
+		</products>
 	</xsl:template>
 	<xsl:template match="CsvHandler">
 		<xsl:apply-templates />
@@ -15,20 +15,26 @@
 		<xsl:apply-templates />
 		</product>
 	</xsl:template>
-	<xsl:template match="ProductGroup">
+	<xsl:template match="ProdGruppe">
 		<group>
 			<xsl:attribute name="sub"/>
 			<xsl:value-of select="." />
 		</group>
 		<xsl:apply-templates />
 	</xsl:template>
-	<xsl:template match="Product">
+	<xsl:template match="ProdID">
 		<name>
 			<xsl:value-of select="." />
 		</name>
 		<xsl:apply-templates />
 	</xsl:template>
-	<xsl:template match="Details">
+		<pic/>
+	<xsl:template match="Preis">
+		<price>
+			<xsl:value-of select="." />
+		</price>
+	</xsl:template>
+	<xsl:template match="Beschreibung">
 		<description>
 			<xsl:value-of select="." />
 		</description>

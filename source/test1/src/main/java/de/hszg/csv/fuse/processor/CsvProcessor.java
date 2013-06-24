@@ -45,8 +45,7 @@ public class CsvProcessor implements Processor {
 
 		XMLOutputter xmlOutputter = new XMLOutputter();
 		xmlOutputter.output(result.getDocument(), System.out);
-		
-		System.out.println(result.getDocument().toString());
+		exchange.getOut().setBody(xmlOutputter.outputString(result.getDocument()));
 	}
 }
 
