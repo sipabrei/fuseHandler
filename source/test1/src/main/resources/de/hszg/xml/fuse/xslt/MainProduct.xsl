@@ -13,6 +13,7 @@
 	<xsl:template match="ns1:result">
 		<xsl:apply-templates />
 	</xsl:template>
+	<provider>Provider1</provider>
 	<xsl:template match="ns1:maingroup">
 		<group>
 			<xsl:attribute name="sub">
