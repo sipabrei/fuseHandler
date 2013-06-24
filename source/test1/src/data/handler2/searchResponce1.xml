@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CsvHandler>
+   <product>
+      <ProductGroup>Laptop</ProductGroup>
+      <ID>123</ID>
+      <Product>Laptop irgendwas</Product>
+      <Amount>700</Amount>
+      <Details>15</Details>
+   </product>
+   <product>
+      <ProductGroup>Laptop</ProductGroup>
+      <ID>777</ID>
+      <Product>andererLaptop</Product>
+      <Amount>500</Amount>
+      <Details>20</Details>
+   </product>
+</CsvHandler>

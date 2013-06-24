@@ -2,6 +2,7 @@ package de.hszg.csv.fuse.processor;
 
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.StringReader;
@@ -46,7 +47,7 @@ public class CsvToXmlParser {
 	}
 
 	public void convertFile(String csvString, String xmlFileName,
-			String delimiter) {
+			char delimiter) {
 
 		BufferedReader csvReader;
 		try {
@@ -55,10 +56,10 @@ public class CsvToXmlParser {
 			Element rootElement = newDoc.createElement("CsvHandler");
 			newDoc.appendChild(rootElement);
 			// Read csv file
-			csvReader = new BufferedReader(new StringReader(csvString));
+			csvReader = new BufferedReader(new FileReader(new File("src/data/handler2/searchResponce1.csv")));//(new StringReader(csvString));
 
 			// ** Now using the OpenCSV **//
-			CSVReader reader = new CSVReader(csvReader, delimiter.charAt(0));
+			CSVReader reader = new CSVReader(csvReader, delimiter);
 			// CSVReader reader = new CSVReader(csvReader);
 			String[] nextLine;
 			int line = 0;

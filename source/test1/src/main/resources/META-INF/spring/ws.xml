@@ -20,32 +20,22 @@ http://camel.apache.org/schema/cxf http://camel.apache.org/schema/cxf/camel-cxf.
 	</bean>
 
 	<cxf:cxfEndpoint id="search" address="http://localhost:9090/search"
-		serviceClass="de.mariospitze.fuse.tests.test1.SearchRequest">
-		<cxf:inInterceptors>
-			<ref bean="loggingInInterceptor" />
-		</cxf:inInterceptors>
-		<cxf:outInterceptors>
-			<ref bean="loggingOutInterceptor" />
-		</cxf:outInterceptors>
-	</cxf:cxfEndpoint>
+		serviceClass="de.mariospitze.fuse.tests.test1.SearchRequest"/>
 
-	<camelContext trace="false"
-		xmlns="http://camel.apache.org/schema/spring">
-		<route>
-			<from uri="cxf:bean:search?dataFormat=POJO" />
-			<convertBodyTo type="String" />
-			<log
-				message="SOAP message received : ${body} and operation type : ${in.header.SOAPAction}" />
-			<setHeader headerName="term">
-				<simple>${body}</simple>
-			</setHeader>
-			<process ref="CsvProcessor" />
-			<setBody>
-				<simple>INSERT INTO searchterms (term) VALUES ('${body}');</simple>
-			</setBody>
-
-			<to uri="jdbc:dataSource" />
-		</route>
-	</camelContext>
+	<camelContext trace="false" xmlns="http://camel.apache.org/schema/spring">
+    <route>
+        <from uri="cxf:bean:search?dataFormat=POJO"/>
+        <convertBodyTo type="String"/>
+        <log message="SOAP message received : ${body} and operation type : ${in.header.SOAPAction}"/>
+        <setHeader headerName="term">
+            <simple>${body}</simple>
+        </setHeader>
+        <setBody>
+            <simple>INSERT INTO searchterms (term) VALUES ('${body}');</simple>
+        </setBody>
+        <process ref="CsvProcessor"/>
+        <to uri="file:src/test/resources/testData/handler2/text.xml"/>
+    </route>
+</camelContext>
 
 </beans>

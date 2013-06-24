@@ -1,21 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<CsvHandler>
-   <product>
-      <ID>1</ID>
-      <Product>Apple MacBook</Product>
-      <Amount>40</Amount>
-      <Details>Notebook: 11,6 inches, Intel Core i5 2.4GHz, 4GB Ram, 500GB HDD</Details>
-   </product>
-   <product>
-      <ID>2</ID>
-      <Product>Apple MacBook</Product>
-      <Amount>10</Amount>
-      <Details>Notebook: 15,6 inches, Intel Core i7 2.4GHz, 8GB Ram, 500GB HDD</Details>
-   </product>
-   <product>
-      <ID>3</ID>
-      <Product>Asus PU500</Product>
-      <Amount>40</Amount>
-      <Details>Notebook: 11,6 inches, Intel Core i3 2.4GHz, 2GB Ram, 500GB HDD</Details>
-   </product>
-</CsvHandler>
+<root xmlns="http://www.example.org/MainProductSchema.xsd"
+	xmlns:ns1="http://xml.netbeans.org/schema/response_search">
+	<product>
+		<group sub="">Laptop</group>
+		<name>Laptop irgendwas</name>
+		<description>15</description>
+	</product>
+	<product>
+		<group sub="">Laptop</group>
+		<name>andererLaptop</name>
+		<description>20</description>
+	</product>
+</root>
