@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:camel="http://camel.apache.org/schema/spring" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+       http://camel.apache.org/schema/spring http://camel.apache.org/schema/spring/camel-spring.xsd">
+
+	<bean id="SQLSplitter" class="de.hszg.xml.fuse.routeHelper.SQLIdSplitter" />
+
+	<bean id="projectPropertyConfigurer"
+		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="location">
+			<value>classpath:/de/hszg/xml/fuse/accounts/postgres.properties
+			</value>
+		</property>
+	</bean>
+
+	<bean id="dataSource"
+		class="org.springframework.jdbc.datasource.SimpleDriverDataSource">
+		<property name="driverClass" value="org.postgresql.Driver" />
+		<property name="url"
+			value="jdbc:postgresql://${postgres.hostname}/${postgres.db}" />
+		<property name="username" value="${postgres.user}" />
+		<property name="password" value="${postgres.password}" />
+	</bean>
+
+	<camelContext xmlns="http://camel.apache.org/schema/spring"
+		trace="false">
+		<route>
+			<from uri="timer://dbSearchTimer?repeatCount=1" />
+			<setBody>
+				<simple>SELECT id FROM products WHERE subgroup = 'Barbie';</simple>
+			</setBody>
+			<to uri="jdbc:dataSource" />
+			<log message="entry: ${body}" />
+			<split>
+				<camel:method bean="SQLSplitter" method="splitBody" />
+				<log message="entry: ${body}" />
+			</split>
+		</route>
+	</camelContext>
+
+</beans>
