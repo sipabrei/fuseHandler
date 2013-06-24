@@ -5,6 +5,7 @@
        http://camel.apache.org/schema/spring http://camel.apache.org/schema/spring/camel-spring.xsd">
 
 	<bean id="SQLSplitter" class="de.hszg.xml.fuse.routeHelper.SQLIdSplitter" />
+	<bean id="handler1XMLMock" class="de.hszg.xml.fuse.routeHelper.Handler1XMLMock" />
 
 	<bean id="projectPropertyConfigurer"
 		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
@@ -23,20 +24,25 @@
 		<property name="password" value="${postgres.password}" />
 	</bean>
 
-	<camelContext xmlns="http://camel.apache.org/schema/spring"
-		trace="false">
+	<routeContext id="dbSearchHandler1" xmlns="http://camel.apache.org/schema/spring">
+	
 		<route>
-			<from uri="timer://dbSearchTimer?repeatCount=1" />
+			<from uri="direct:dbSearchHandler1" />
 			<setBody>
-				<simple>SELECT id FROM products WHERE subgroup = 'Barbie';</simple>
+				<simple>SELECT id FROM products WHERE subgroup = '${header.term}';</simple>
 			</setBody>
+			<log message="entry: ${body}" />
 			<to uri="jdbc:dataSource" />
 			<log message="entry: ${body}" />
 			<split>
 				<camel:method bean="SQLSplitter" method="splitBody" />
 				<log message="entry: ${body}" />
+				<process ref="handler1XMLMock" />
+				<log message="ergebniss: ${body}" />
+				<to uri="direct:transformHandler1" />
+				<log message="nochn ergebniss: ${body}" />
 			</split>
 		</route>
-	</camelContext>
+	</routeContext>
 
 </beans>

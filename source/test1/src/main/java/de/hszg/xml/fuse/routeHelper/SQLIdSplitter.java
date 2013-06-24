@@ -13,8 +13,10 @@ public class SQLIdSplitter {
 	 * @return a list containing each part splitted
 	 */
 	public List<String> splitBody(String body) {
-
+		
 		List<String> answer = new ArrayList<String>();
+		if(body.length()<=3)
+			return answer;
 		body = body.substring(1, body.length() - 1);
 		String[] parts = body.split(",");
 		for (String part : parts) {

@@ -20,22 +20,44 @@ http://camel.apache.org/schema/cxf http://camel.apache.org/schema/cxf/camel-cxf.
 	</bean>
 
 	<cxf:cxfEndpoint id="search" address="http://localhost:9090/search"
-		serviceClass="de.mariospitze.fuse.tests.test1.SearchRequest"/>
+		serviceClass="de.mariospitze.fuse.tests.test1.SearchRequest" />
+
+	<import resource="dbSearch.xml" />
+	<import resource="Handler1Test11.xml" />
 
 	<camelContext trace="false" xmlns="http://camel.apache.org/schema/spring">
-    <route>
-        <from uri="cxf:bean:search?dataFormat=POJO"/>
-        <convertBodyTo type="String"/>
-        <log message="SOAP message received : ${body} and operation type : ${in.header.SOAPAction}"/>
-        <setHeader headerName="term">
-            <simple>${body}</simple>
-        </setHeader>
-        <setBody>
-            <simple>INSERT INTO searchterms (term) VALUES ('${body}');</simple>
-        </setBody>
-        <process ref="CsvProcessor"/>
-        <to uri="file:src/test/resources/testData/handler2/text.xml"/>
-    </route>
-</camelContext>
+
+		<routeContextRef ref="dbSearchHandler1" />
+		<routeContextRef ref="transformHandler1" />
+
+		<route>
+			<from uri="cxf:bean:search?dataFormat=POJO" />
+			<convertBodyTo type="String" />
+			<log
+				message="SOAP message received : ${body} and operation type : ${in.header.SOAPAction}" />
+			<setHeader headerName="term">
+				<description>backup of search term for later use</description>
+				<simple>${body}</simple>
+			</setHeader>
+			<setBody>
+				<simple>INSERT INTO searchterms (term) VALUES ('${body}');</simple>
+			</setBody>
+			<multicast>
+				<to uri="direct:handler1" />
+				<to uri="direct:handler2" />
+			</multicast>
+			<log message="${body}" />
+		</route>
+		<route>
+			<from uri="direct:handler1" />
+			<log message="handler1" />
+			<to uri="direct:dbSearchHandler1" />
+
+		</route>
+		<route>
+			<from uri="direct:handler2" />
+			<log message="${body}" />
+		</route>
+	</camelContext>
 
 </beans>

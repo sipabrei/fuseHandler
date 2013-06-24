@@ -9,11 +9,13 @@
 	<bean id="handler1ProcessorBarbie" class="de.hszg.xml.fuse.processor.Handler1ProcessorBarbie" />
 	<bean id="handler1ProcessorRasierer" class="de.hszg.xml.fuse.processor.Handler1ProcessorRasierer" />
 
+	<bean id="productAggregator" class="de.hszg.xml.fuse.routeHelper.ProductAggregator" />
 
-	<camelContext trace="false" xmlns="http://camel.apache.org/schema/spring">
+	<camelContext id="transformHandler1" xmlns="http://camel.apache.org/schema/spring">
     <route>
-        <from uri="file:src/test/resources/testData/handler1/ordner?noop=true"/>
-        <split>
+        <from uri="file:src/test/resources/testData/handler1/complete?noop=true"/>
+        <!--<from uri="direct:transformHandler1" /> -->
+        <split strategyRef="productAggregator">
             <xpath>ns1:root/ns1:results/ns1:result</xpath>
             <choice>
                 <when>
@@ -22,15 +24,16 @@
                         <when>
                             <xpath>//ns1:result/ns1:maingroup/ns1:subgroup[@name='Barbie']</xpath>
                             <process ref="handler1ProcessorBarbie"/>
-                            <log message="${body}"/>
+                            <log loggingLevel="DEBUG" message="foo: ${body}"/>
                         </when>
                         <when>
-                            <xpath>//ns1:result/ns1:maingroup/ns1:subgroup[@name='Plueschtiere']</xpath>
+                            <xpath>//ns1:result/ns1:maingroup/ns1:subgroup[@name='Plüschtiere']</xpath>
                             <process ref="handler1ProcessorPlueschtier"/>
-                            <log message="${body}"/>
+                            <log loggingLevel="DEBUG" message="${body}"/>
                         </when>
                         <otherwise>
-                            <log message="nicht erkannt: ${body}"/>
+                            <log loggingLevel="DEBUG" message="nicht erkannt: ${body}"/>
+                            <setBody><simple>&lt;?xml version="1.0" encoding="UTF-8"?&gt;&lt;product /&gt;</simple></setBody>
                         </otherwise>
                     </choice>
                 </when>
@@ -40,19 +43,21 @@
                         <when>
                             <xpath>//ns1:result/ns1:maingroup/ns1:subgroup[@name='Rasierer']</xpath>
                             <process ref="handler1ProcessorRasierer"/>
-                            <log message="${body}"/>
+                            <log loggingLevel="DEBUG" message="${body}"/>
                         </when>
                         <otherwise>
-                            <log message="nicht erkannt: ${body}"/>
+                            <log loggingLevel="DEBUG" message="nicht erkannt: ${body}"/>
+                            <setBody><simple>&lt;?xml version="1.0" encoding="UTF-8"?&gt;&lt;product /&gt;</simple></setBody>
                         </otherwise>
                     </choice>
                 </when>
                 <otherwise>
-                    <log message="nicht erkannt: ${body}"/>
+                    <log loggingLevel="DEBUG" message="nicht erkannt: ${body}"/>
+                    <setBody><simple>&lt;?xml version="1.0" encoding="UTF-8"?&gt;&lt;product /&gt;</simple></setBody>
                 </otherwise>
             </choice>
         </split>
-        <log message="${body}"/>
+        <log message="${body}" />
     </route>
 </camelContext>
 

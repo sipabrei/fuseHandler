@@ -34,8 +34,7 @@ public abstract class Handler1ProcessorMain implements Processor {
 				      new StreamSource(this.getClass().getClassLoader().getResourceAsStream(resource)));
 		transformer.transform(xmlFile, result);
 		XMLOutputter xmlOutputter = new XMLOutputter();
-		xmlOutputter.output(result.getDocument(), System.out);
-		return result.getDocument().toString();
+		return xmlOutputter.outputString(result.getDocument());
 	}
 
 }

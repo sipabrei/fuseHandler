@@ -11,7 +11,6 @@ public class Handler1ProcessorPlueschtier extends Handler1ProcessorMain {
 	public void process(Exchange exchange) throws Exception {
 		String message = exchange.getIn().getBody(String.class);
 		String mainConvert = mainConvert(message,xslUrl);
-		System.out.println(mainConvert);
 		exchange.getOut().setBody(mainConvert);
 
 	}
