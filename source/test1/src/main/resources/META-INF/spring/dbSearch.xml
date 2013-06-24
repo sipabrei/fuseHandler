@@ -7,6 +7,8 @@
 	<bean id="SQLSplitter" class="de.hszg.xml.fuse.routeHelper.SQLIdSplitter" />
 	<bean id="handler1XMLMock" class="de.hszg.xml.fuse.routeHelper.Handler1XMLMock" />
 
+	<bean id="productAggregator" class="de.hszg.xml.fuse.routeHelper.ProductAggregator" />
+
 	<bean id="projectPropertyConfigurer"
 		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
 		<property name="location">
@@ -31,17 +33,18 @@
 			<setBody>
 				<simple>SELECT id FROM products WHERE subgroup = '${header.term}';</simple>
 			</setBody>
-			<log message="entry: ${body}" />
+			<log loggingLevel="DEBUG" message="entry: ${body}" />
 			<to uri="jdbc:dataSource" />
-			<log message="entry: ${body}" />
-			<split>
+			<log loggingLevel="DEBUG" message="entry: ${body}" />
+			<split strategyRef="productAggregator">
 				<camel:method bean="SQLSplitter" method="splitBody" />
-				<log message="entry: ${body}" />
+				<log loggingLevel="DEBUG" message="entry: ${body}" />
 				<process ref="handler1XMLMock" />
-				<log message="ergebniss: ${body}" />
+				<log loggingLevel="DEBUG" message="ergebniss: ${body}" />
 				<to uri="direct:transformHandler1" />
-				<log message="nochn ergebniss: ${body}" />
+				<log loggingLevel="DEBUG" message="nochn ergebniss: ${body}" />
 			</split>
+			<log loggingLevel="DEBUG" message="bar: ${body}" />
 		</route>
 	</routeContext>
 

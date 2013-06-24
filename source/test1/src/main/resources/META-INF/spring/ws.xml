@@ -11,6 +11,8 @@ http://camel.apache.org/schema/cxf http://camel.apache.org/schema/cxf/camel-cxf.
 	<bean id="loggingOutInterceptor" class="org.apache.cxf.interceptor.LoggingOutInterceptor" />
 	<bean id="loggingInInterceptor" class="org.apache.cxf.interceptor.LoggingInInterceptor" />
 	<bean id="CsvProcessor" class="de.hszg.csv.fuse.processor.CsvProcessor" />
+	<bean id="productAggregator" class="de.hszg.xml.fuse.routeHelper.ProductAggregator" />
+
 	<bean id="dataSource"
 		class="org.springframework.jdbc.datasource.SimpleDriverDataSource">
 		<property name="driverClass" value="org.postgresql.Driver" />
@@ -25,7 +27,8 @@ http://camel.apache.org/schema/cxf http://camel.apache.org/schema/cxf/camel-cxf.
 	<import resource="dbSearch.xml" />
 	<import resource="Handler1Test11.xml" />
 
-	<camelContext trace="false" xmlns="http://camel.apache.org/schema/spring">
+	<camelContext trace="false"
+		xmlns="http://camel.apache.org/schema/spring">
 
 		<routeContextRef ref="dbSearchHandler1" />
 		<routeContextRef ref="transformHandler1" />
@@ -42,7 +45,7 @@ http://camel.apache.org/schema/cxf http://camel.apache.org/schema/cxf/camel-cxf.
 			<setBody>
 				<simple>INSERT INTO searchterms (term) VALUES ('${body}');</simple>
 			</setBody>
-			<multicast>
+			<multicast strategyRef="productAggregator">
 				<to uri="direct:handler1" />
 				<to uri="direct:handler2" />
 			</multicast>
@@ -56,7 +59,7 @@ http://camel.apache.org/schema/cxf http://camel.apache.org/schema/cxf/camel-cxf.
 		</route>
 		<route>
 			<from uri="direct:handler2" />
-			<log message="${body}" />
+			<camel:process ref="CsvProcessor" />
 		</route>
 	</camelContext>
 

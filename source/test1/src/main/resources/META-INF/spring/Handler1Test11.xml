@@ -11,10 +11,10 @@
 
 	<bean id="productAggregator" class="de.hszg.xml.fuse.routeHelper.ProductAggregator" />
 
-	<camelContext id="transformHandler1" xmlns="http://camel.apache.org/schema/spring">
+	<routeContext id="transformHandler1" xmlns="http://camel.apache.org/schema/spring">
     <route>
-        <from uri="file:src/test/resources/testData/handler1/complete?noop=true"/>
-        <!--<from uri="direct:transformHandler1" /> -->
+        <!-- <from uri="file:src/test/resources/testData/handler1/complete?noop=true"/>-->
+        <from uri="direct:transformHandler1" />
         <split strategyRef="productAggregator">
             <xpath>ns1:root/ns1:results/ns1:result</xpath>
             <choice>
@@ -57,8 +57,8 @@
                 </otherwise>
             </choice>
         </split>
-        <log message="${body}" />
+        <log loggingLevel="DEBUG" message="${body}" />
     </route>
-</camelContext>
+</routeContext>
 
 </beans>

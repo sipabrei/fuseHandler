@@ -1,17 +1,9 @@
 package de.hszg.csv.fuse.processor;
 
-import java.io.File;
 import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.StringReader;
 
-import javax.xml.transform.OutputKeys;
-import javax.xml.transform.Result;
-import javax.xml.transform.Source;
 import javax.xml.transform.Transformer;
 import javax.xml.transform.TransformerFactory;
-import javax.xml.transform.dom.DOMSource;
-import javax.xml.transform.stream.StreamResult;
 import javax.xml.transform.stream.StreamSource;
 
 import org.apache.camel.Exchange;
@@ -44,7 +36,6 @@ public class CsvProcessor implements Processor {
 		aTransformer.transform(xmlFile, result);
 
 		XMLOutputter xmlOutputter = new XMLOutputter();
-		xmlOutputter.output(result.getDocument(), System.out);
 		exchange.getOut().setBody(xmlOutputter.outputString(result.getDocument()));
 	}
 }

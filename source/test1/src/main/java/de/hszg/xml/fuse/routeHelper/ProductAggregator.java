@@ -25,7 +25,7 @@ public class ProductAggregator implements AggregationStrategy {
 	
 	@Override
 	public Exchange aggregate(Exchange oldExchange, Exchange newExchange) {
-
+		
 		String oldMessage;
 		
 		if(oldExchange == null)
@@ -34,6 +34,9 @@ public class ProductAggregator implements AggregationStrategy {
 		else
 			oldMessage = oldExchange.getIn().getBody(String.class);
 		String newMessage = newExchange.getIn().getBody(String.class);
+		
+		if(newMessage.indexOf('[')==0)
+			return oldExchange;
 		
 		SAXBuilder builder = new SAXBuilder();
 		Document oldDoc = null;
@@ -59,12 +62,20 @@ public class ProductAggregator implements AggregationStrategy {
 		logger.debug("neu:" + newMessage);
 		try {
 			newDoc = builder.build(new StringReader(newMessage));
-		} catch (JDOMException | IOException e) {
-			// TODO Auto-generated catch block
+		} catch (Exception e) {
+			logger.info(newMessage);
 			e.printStackTrace();
+			System.exit(1);
 		}
 		
-		oldDoc.getRootElement().addContent(newDoc.getRootElement().detach());
+		if(newDoc.getRootElement().getName().equals("products")){
+			for(Object elemObj : newDoc.getRootElement().getChildren()){
+				Element elem = (Element) ((Element) elemObj).clone();
+				elem.detach();
+				oldDoc.getRootElement().addContent(elem);
+			}
+		} else
+			oldDoc.getRootElement().addContent(newDoc.getRootElement().detach());
 		
 		XMLOutputter xmlOut = new XMLOutputter(Format.getPrettyFormat());
 		
