@@ -1,3 +1,2 @@
-ProductGroup;ID;Product;Amount;Details
-Laptop;123;Laptop irgendwas;700;15
-Laptop;777;andererLaptop;500;20
+ProdGruppe;ProdID;Beschreibung;Preis;Anzahl
+PC;428;PC1;400;55
