@@ -55,11 +55,23 @@ http://camel.apache.org/schema/cxf http://camel.apache.org/schema/cxf/camel-cxf.
 			<from uri="direct:handler1" />
 			<log message="handler1" />
 			<to uri="direct:dbSearchHandler1" />
-
 		</route>
 		<route>
 			<from uri="direct:handler2" />
+			<setHeader headerName="CamelHttpMethod">
+				<constant>GET</constant>
+			</setHeader>
+			<setHeader headerName="CamelHttpUri">
+			<simple>http://193.174.103.84:8088/search/${header.term}</simple>
+			</setHeader>
+			<to uri="http://datdingisnutzloshahahahaha" />
+			<convertBodyTo type="String" />
+			<setHeader headerName="BodyCopy">
+				<simple>${body}</simple>
+			</setHeader>
+			<log message="TEST1: ${body}" />
 			<camel:process ref="CsvProcessor" />
+			<log message="TEST2: ${body}" />
 		</route>
 	</camelContext>
 
