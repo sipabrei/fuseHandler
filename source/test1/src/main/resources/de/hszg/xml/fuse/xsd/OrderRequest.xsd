@@ -1,7 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <schema xmlns="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.example.org/OrderRequestSchema"
-	xmlns:tns="http://www.example.org/OrderRequestSchema" elementFormDefault="qualified">
-	<element name="order" type="tns:orderTyp"/>
+	xmlns:tns="http://www.example.org/OrderRequestSchema"
+	elementFormDefault="qualified">
+	<element name="orders" type="tns:ordersTyp">
+	</element>
+	<complexType name="ordersTyp">
+		<choice minOccurs="1" maxOccurs="unbounded">
+			<element name="order" type="tns:orderTyp" />
+		</choice>
+	</complexType>
 	<complexType name="orderTyp">
 		<sequence>
 			<element name="name" type="string" />
