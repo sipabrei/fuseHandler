@@ -1,2 +1,5 @@
 ProdGruppe;ProdID;Beschreibung;Preis;Anzahl
-PC;428;PC1;400;55
+PC;428_Csv;PC1;400;55
+PC;429_Csv;PC2;400;55
+PC;430_Csv;PC3;400;55
+PC;431_Csv;PC4;400;55

@@ -3,42 +3,46 @@
 	xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:ns1="http://xml.netbeans.org/schema/response_search"
 	xmlns="http://www.example.org/MainProductSchema.xsd">
 	<xsl:template match="/">
-		<products>
-			<xsl:apply-templates />
-		</products>
-	</xsl:template>
-	<xsl:template match="CsvHandler">
-		<xsl:apply-templates />
-	</xsl:template>
-	<xsl:template match="product">
 		<product>
-		<xsl:apply-templates />
+			<xsl:apply-templates />
 		</product>
 	</xsl:template>
-	<xsl:template match="ProdGruppe">
+	<xsl:template match="tns:order">
+		<xsl:apply-templates />
+	</xsl:template>
+	<provider>Provider1</provider>
+	<xsl:template match="ns1:maingroup">
 		<group>
-			<xsl:attribute name="sub"/>
-			<xsl:value-of select="." />
+			<xsl:attribute name="sub">
+			<xsl:value-of select="ns1:subgroup/@name" />
+		</xsl:attribute>
+			<xsl:value-of select="@name" />
 		</group>
 		<xsl:apply-templates />
 	</xsl:template>
-	<xsl:template match="ProdID">
+	<xsl:template match="ns1:subgroup">
+		<xsl:apply-templates />
+	</xsl:template>
+	<xsl:template match="ns1:product">
 		<name>
-			<xsl:value-of select="." />
+			<xsl:value-of select="@id" />
 		</name>
 		<xsl:apply-templates />
 	</xsl:template>
-		<pic/>
-	<xsl:template match="Preis">
+	<xsl:template match="ns1:price">
 		<price>
 			<xsl:value-of select="." />
 		</price>
 	</xsl:template>
-	<xsl:template match="Beschreibung">
+	<xsl:template match="ns1:pic">
+		<image>
+			<xsl:value-of select="." />
+		</image>
+	</xsl:template>
+	<xsl:template match="ns1:description">
 		<description>
 			<xsl:value-of select="." />
 		</description>
-		<provider>handler2</provider>
 	</xsl:template>
 	<xsl:template match="node()">
 	</xsl:template>

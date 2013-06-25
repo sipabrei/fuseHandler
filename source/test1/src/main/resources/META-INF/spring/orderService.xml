@@ -11,21 +11,23 @@
 		serviceClass="de.hszg.xml.fuse.services.OrderRequest" />
 		
 	<bean id="processor" class="de.hszg.xml.fuse.routeHelper.XMLOrderProcessor" />
+	<bean id="handler1XMLProcessor" class="de.hszg.xml.fuse.routeHelper.Handler1XMLProcessor" />
 
 	<camelContext xmlns="http://camel.apache.org/schema/spring"
 		trace="false">
 		<route>
 			<from uri="cxf:bean:order?dataFormat=POJO" />
 			<convertBodyTo type="String" />
-			<!-- <camel:process ref="processor" /> -->
+			<camel:process ref="processor" />
 			<log message="get: ${body}" />
-			<split>
+			<split ref="aggregator">				
 				<xpath>tns:orders/tns:order</xpath>
-
+				<log message="xpath: ${body}" />
 
 				<choice>
 					<when>
-						<xpath>//tns:order/tns:provider=handler1</xpath>
+						<xpath>//tns:provider = 'handler1'</xpath>
+						<camel:process ref="handler1XMLProcessor"/>
 						<log message="handler1" />
 					</when>
 					<camel:otherwise>
