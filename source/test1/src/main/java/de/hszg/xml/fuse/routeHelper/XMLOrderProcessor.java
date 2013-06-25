@@ -26,7 +26,7 @@ public class XMLOrderProcessor implements Processor{
 		
 		
 		try {
-			logger.info("text");
+			logger.info(exchange.getIn().getBody(String.class));
 			xml = builder.build(new StringReader(exchange.getIn().getBody(String.class)));
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
