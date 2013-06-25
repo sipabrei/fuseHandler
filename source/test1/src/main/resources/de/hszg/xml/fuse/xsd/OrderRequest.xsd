@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.example.org/OrderRequestSchema"
+	xmlns:tns="http://www.example.org/OrderRequestSchema" elementFormDefault="qualified">
+	<element name="order" type="tns:orderTyp"/>
+	<complexType name="orderTyp">
+		<sequence>
+			<element name="name" type="string" />
+			<element name="provider" type="string" />
+			<element name="count" type="tns:priceTyp" />
+			<element name="customerID" type="string" />
+		</sequence>
+	</complexType>
+	<simpleType name="priceTyp">
+		<restriction base="int">
+			<pattern value="[1-9]\d*" />
+		</restriction>
+	</simpleType>
+	<complexType name="groupDef">
+		<attribute name="sub" type="string" />
+	</complexType>
+</schema>
