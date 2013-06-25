@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:camel="http://camel.apache.org/schema/spring" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:req="http://xml.netbeans.org/schema/Request" xmlns:cxf="http://camel.apache.org/schema/cxf"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
-       http://camel.apache.org/schema/spring http://camel.apache.org/schema/spring/camel-spring.xsd">
+       http://camel.apache.org/schema/spring http://camel.apache.org/schema/spring/camel-spring.xsd
+       http://camel.apache.org/schema/cxf http://camel.apache.org/schema/cxf/camel-cxf.xsd">
 
 	<bean id="SQLSplitter" class="de.hszg.xml.fuse.routeHelper.SQLIdSplitter" />
 	<bean id="handler1XMLMock" class="de.hszg.xml.fuse.routeHelper.Handler1XMLMock" />
@@ -17,6 +19,14 @@
 		</property>
 	</bean>
 
+	<cxf:cxfEndpoint id="serviceEndpoint"
+		address="http://141.46.192.69:9080/Trader2EndpointService/Trader2EndpointPort"
+		endpointName="Trader2EndpointPort" serviceName="Trader2EndpointService"
+		
+		wsdlURL="classpath:/de/hszg/xml/fuse/wsdl/Trader2EndpointPort.wsdl"
+		serviceClass="TraderEndpointInput"
+		bindingId="Trader2EndpointBinding"/>
+
 	<bean id="dataSource"
 		class="org.springframework.jdbc.datasource.SimpleDriverDataSource">
 		<property name="driverClass" value="org.postgresql.Driver" />
@@ -27,7 +37,7 @@
 	</bean>
 
 	<routeContext id="dbSearchHandler1" xmlns="http://camel.apache.org/schema/spring">
-	
+
 		<route>
 			<from uri="direct:dbSearchHandler1" />
 			<setBody>
@@ -40,7 +50,46 @@
 				<camel:method bean="SQLSplitter" method="splitBody" />
 				<log loggingLevel="DEBUG" message="entry: ${body}" />
 				<process ref="handler1XMLMock" />
-				<log loggingLevel="DEBUG" message="ergebniss: ${body}" />
+				<!-- <setBody>
+					<simple>&lt;req:requestTyp&gt;objectname&lt;/req:requestTyp&gt;
+        &lt;req:requestContent&gt;
+          &lt;!--You have a CHOICE of the next 2 items at this level--&gt;
+          &lt;req:payment&gt;
+            &lt;req:personality&gt;
+              &lt;req:firstname&gt;?string?&lt;/req:firstname&gt;
+              &lt;req:lastname&gt;?string?&lt;/req:lastname&gt;
+              &lt;req:address&gt;?string?&lt;/req:address&gt;
+              &lt;req:zipcode&gt;?7?&lt;/req:zipcode&gt;
+              &lt;req:city&gt;?string?&lt;/req:city&gt;
+            &lt;/req:personality&gt;
+            &lt;req:billing&gt;
+              &lt;req:accountnumber&gt;?7?&lt;/req:accountnumber&gt;
+              &lt;req:bankcode&gt;?7?&lt;/req:bankcode&gt;
+            &lt;/req:billing&gt;
+            &lt;req:objects&gt;?string?&lt;/req:objects&gt;
+          &lt;/req:payment&gt;
+          &lt;req:search&gt;
+            &lt;!--You have a CHOICE of the next 3 items at this level--&gt;
+            &lt;req:mainGroup&gt;?string?&lt;/req:mainGroup&gt;
+            &lt;req:subGroup&gt;?string?&lt;/req:subGroup&gt;
+            &lt;req:objectName&gt;barbie_2&lt;/req:objectName&gt;
+          &lt;/req:search&gt;</simple>
+				</setBody>
+
+				<setHeader headerName="operationName">
+					<simple>Trader2EndpointOperation
+				</simple>
+				</setHeader>
+				<to uri="cxf:serviceEndpoint?dataFormat=PAYLOAD" />-->
+				<!-- <to uri="cxf://http://141.46.192.69:9080/Trader2EndpointService/Trader2EndpointPort?wsdlURL=http://141.46.192.69:9080/Trader2EndpointService/Trader2EndpointPort?wsdl&amp;serviceName=Trader2EndpointService&amp;portName=Trader2EndpointPort&amp;dataFormat=MESSAGE" 
+					/> -->
+				<!-- <to uri="cxf:http://141.46.192.69:9080/Trader2EndpointService/Trader2EndpointPort?wsdlURL=/de/hszg/xml/fuse/wsdl/Trader2EndpointPort.wsdl&amp;serviceClass=String" 
+					/> -->
+				<!-- <to uri="cxf://http://141.46.192.69:9080/Trader2EndpointService/Trader2EndpointPort?wsdlURL=http://141.46.192.69:9080/Trader2EndpointService/Trader2EndpointPort?wsdl&amp;serviceName=Trader2EndpointOperation&amp;portName=Trader2EndpointPort&amp;dataFormat=MESSAGE" 
+					/> -->
+				<!-- <to uri="spring-ws:http://141.46.192.69:9080/Trader2EndpointService/Trader2EndpointPort" 
+					/> -->
+				<log message="ergebniss: ${body}" />
 				<to uri="direct:transformHandler1" />
 				<log loggingLevel="DEBUG" message="nochn ergebniss: ${body}" />
 			</split>
@@ -48,4 +97,5 @@
 		</route>
 	</routeContext>
 
+	<camelContext xmlns="http://camel.apache.org/schema/spring" />
 </beans>
