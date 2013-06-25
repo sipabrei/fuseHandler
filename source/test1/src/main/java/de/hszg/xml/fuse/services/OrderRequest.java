@@ -1,13 +1,16 @@
 package de.hszg.xml.fuse.services;
 
-import java.util.List;
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 
 public class OrderRequest {
 	
-	public String order(List<String> content){
-		
-		return content.toString();
-		
+	private static Logger logger = LogManager.getLogger("OrderRequest");
+	
+	
+	public String order(String content){
+
+		return content;
 	}
 
 }

@@ -1,21 +1,39 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-       xmlns:camel="http://camel.apache.org/schema/spring"
-       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xmlns:cxf="http://camel.apache.org/schema/cxf"
-       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+	xmlns:camel="http://camel.apache.org/schema/spring" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:cxf="http://camel.apache.org/schema/cxf" xmlns:tns="http://www.example.org/OrderRequestSchema"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
        http://camel.apache.org/schema/spring http://camel.apache.org/schema/spring/camel-spring.xsd
        http://camel.apache.org/schema/cxf http://camel.apache.org/schema/cxf/camel-cxf.xsd">
 
 
 	<cxf:cxfEndpoint id="order" address="http://localhost:9090/order"
 		serviceClass="de.hszg.xml.fuse.services.OrderRequest" />
+		
+	<bean id="processor" class="de.hszg.xml.fuse.routeHelper.XMLOrderProcessor" />
 
-  <camelContext xmlns="http://camel.apache.org/schema/spring" trace="false">
-    <route>
+	<camelContext xmlns="http://camel.apache.org/schema/spring"
+		trace="false">
+		<route>
 			<from uri="cxf:bean:order?dataFormat=POJO" />
-			<log message="${body}" />
-    </route>
-  </camelContext>
+			<convertBodyTo type="String" />
+			<!-- <camel:process ref="processor" /> -->
+			<log message="get: ${body}" />
+			<split>
+				<xpath>tns:orders/tns:order</xpath>
+
+
+				<choice>
+					<when>
+						<xpath>//tns:order/tns:provider=handler1</xpath>
+						<log message="handler1" />
+					</when>
+					<camel:otherwise>
+						<log message="handler2" />
+					</camel:otherwise>
+				</choice>
+			</split>
+		</route>
+	</camelContext>
 
 </beans>
