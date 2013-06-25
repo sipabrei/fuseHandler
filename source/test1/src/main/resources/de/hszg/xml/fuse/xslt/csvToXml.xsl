@@ -38,6 +38,7 @@
 		<description>
 			<xsl:value-of select="." />
 		</description>
+		<provider>handler2</provider>
 	</xsl:template>
 	<xsl:template match="node()">
 	</xsl:template>

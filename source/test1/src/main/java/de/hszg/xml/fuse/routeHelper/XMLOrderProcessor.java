@@ -24,9 +24,8 @@ public class XMLOrderProcessor implements Processor{
 		
 		SAXBuilder builder = new SAXBuilder();
 		
-		
+		logger.info("in"+exchange.getIn().getBody(String.class));
 		try {
-			logger.info(exchange.getIn().getBody(String.class));
 			xml = builder.build(new StringReader(exchange.getIn().getBody(String.class)));
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
@@ -40,13 +39,13 @@ public class XMLOrderProcessor implements Processor{
 		}
 		
 		XMLOutputter xmlOut = new XMLOutputter(Format.getPrettyFormat());
-		
+
 		String outputXML = xmlOut.outputString(xml);
-		
-		exchange.getOut().setBody(xml);
-		
-		logger.info(outputXML);
-		
+
+		exchange.getOut().setBody(outputXML);
+
+		logger.info("out"+outputXML);
+		logger.info("outXML2"+xml);
 		
 	}
 
