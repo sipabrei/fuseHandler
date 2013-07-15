@@ -56,7 +56,7 @@ public class CsvToXmlParser {
 			Element rootElement = newDoc.createElement("CsvHandler");
 			newDoc.appendChild(rootElement);
 			// Read csv file
-			csvReader = new BufferedReader(new FileReader(new File("src/data/handler2/searchResponce1.csv")));//(new StringReader(csvString));
+			csvReader = new BufferedReader(new StringReader(csvString));
 
 			// ** Now using the OpenCSV **//
 			CSVReader reader = new CSVReader(csvReader, delimiter);

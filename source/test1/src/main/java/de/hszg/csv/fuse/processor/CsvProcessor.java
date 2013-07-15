@@ -8,6 +8,7 @@ import javax.xml.transform.stream.StreamSource;
 
 import org.apache.camel.Exchange;
 import org.apache.camel.Processor;
+import org.apache.log4j.Logger;
 import org.jdom.input.SAXBuilder;
 import org.jdom.output.XMLOutputter;
 import org.jdom.transform.JDOMResult;
@@ -22,8 +23,9 @@ public class CsvProcessor implements Processor {
 
 	@Override
 	public void process(Exchange exchange) throws Exception {
-		String exchangeHeader = exchange.getIn().getHeader("term").toString();
-		parser.convertFile(exchangeHeader, xmlFileName, ";".charAt(0));
+		String exchangeBody = exchange.getIn().getBody(String.class);
+		System.out.println("TESTBODY"+exchangeBody);
+		parser.convertFile(exchangeBody, xmlFileName, ";".charAt(0));
 		org.jdom.Document doc = new SAXBuilder().build(new FileReader(
 				xmlFileName));
 		JDOMSource xmlFile = new JDOMSource(doc);

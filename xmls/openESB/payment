@@ -1,0 +1,33 @@
+
+<soapenv:Envelope xsi:schemaLocation="http://schemas.xmlsoap.org/soap/envelope/ http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:new="http://j2ee.netbeans.org/wsdl/ProductAdministration/src/newWSDL" xmlns:req="http://xml.netbeans.org/schema/Request">
+    <soapenv:Body>
+        <new:Trader2EndpointOperation>
+            <TraderEndpointInput>
+                <req:requestTyp>payment</req:requestTyp>
+                <req:requestContent>
+          <!--You have a CHOICE of the next 2 items at this level-->
+                    <req:payment>
+                        <req:personality>
+                            <req:firstname>Max</req:firstname>
+                            <req:lastname>Mustermann</req:lastname>
+                            <req:address>Am Hirschwinkel</req:address>
+                            <req:zipcode>02826</req:zipcode>
+                            <req:city>Görlitz</req:city>
+                        </req:personality>
+                        <req:billing>
+                            <req:accountnumber>058987453</req:accountnumber>
+                            <req:bankcode>080215648</req:bankcode>
+                        </req:billing>
+                        <req:objects>barbie_1:3-barbie_2:4</req:objects>
+                    </req:payment>
+                    <req:search>
+            <!--You have a CHOICE of the next 3 items at this level-->
+                        <req:mainGroup>?string?</req:mainGroup>
+                        <req:subGroup>?string?</req:subGroup>
+                        <req:objectName>?string?</req:objectName>
+                    </req:search>
+                </req:requestContent>
+            </TraderEndpointInput>
+        </new:Trader2EndpointOperation>
+    </soapenv:Body>
+</soapenv:Envelope>

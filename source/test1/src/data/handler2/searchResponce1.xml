@@ -1,10 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <CsvHandler>
    <product>
-      <ProdGruppe>PC</ProdGruppe>
-      <ProdID>428</ProdID>
-      <Beschreibung>PC1</Beschreibung>
-      <Preis>400</Preis>
-      <Anzahl>55</Anzahl>
+      <ProdGruppe>Laptop</ProdGruppe>
+      <ProdID>123</ProdID>
+      <Beschreibung>Laptop irgendwas</Beschreibung>
+      <Preis>700</Preis>
+      <Anzahl>14</Anzahl>
+   </product>
+   <product>
+      <ProdGruppe>Laptop</ProdGruppe>
+      <ProdID>777</ProdID>
+      <Beschreibung>andererLaptop</Beschreibung>
+      <Preis>500</Preis>
+      <Anzahl>20</Anzahl>
+   </product>
+   <product>
+      <ProdGruppe>Laptop</ProdGruppe>
+      <ProdID>696</ProdID>
+      <Beschreibung>nochn Laptop</Beschreibung>
+      <Preis>900</Preis>
+      <Anzahl>600</Anzahl>
    </product>
 </CsvHandler>
