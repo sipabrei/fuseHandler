@@ -42,6 +42,12 @@
                 </otherwise>
             </choice>
         </split>
+        
+        <setBody>
+        <simple>${header.handler1Order}</simple>
+        </setBody>
+        <!-- Webservice request to xml handler -->
+        
         <process ref="postProcessor"/>
     </route>
 </camelContext>

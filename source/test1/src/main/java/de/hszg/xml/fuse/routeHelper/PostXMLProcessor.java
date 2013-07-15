@@ -29,7 +29,9 @@ public class PostXMLProcessor implements Processor {
 		}
 		
 		OrderBuilderHandler1 handler1Builder = new OrderBuilderHandler1(instance.getUser().getId());
-		String request = handler1Builder.build(handler1);
+		String requestHandler1 = handler1Builder.build(handler1);
+		
+		exchange.getOut().setHeader("handler1Order", requestHandler1);
 		
 		handler1 = instance.getHandler2();
 		logger.info("handler2");
