@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<tns:order xmlns:tns="http://www.example.org/OrderRequestSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.example.org/OrderRequestSchema OrderRequest.xsd ">
-  <tns:name>tns:name</tns:name>
-  <tns:provider>tns:provider</tns:provider>
-  <tns:count>0</tns:count>
-  <tns:customerID>tns:customerID</tns:customerID>
-</tns:order>
+<tns:orders xmlns:tns="http://www.example.org/OrderRequestSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.example.org/OrderRequestSchema OrderRequest.xsd ">
+  <tns:order>
+    <tns:name>tns:name</tns:name>
+    <tns:provider>tns:provider</tns:provider>
+    <tns:count>1</tns:count>
+    <tns:customerID>tns:customerID</tns:customerID>
+  </tns:order>
+</tns:orders>

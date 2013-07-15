@@ -13,6 +13,8 @@ import org.jdom.input.SAXBuilder;
 import org.jdom.output.Format;
 import org.jdom.output.XMLOutputter;
 
+import de.hszg.xml.fuse.exist.ExistUser;
+
 public class XMLOrderProcessor implements Processor{
 
 	private static Logger logger = LogManager.getLogger("XMLOrderProcessor");
@@ -43,6 +45,9 @@ public class XMLOrderProcessor implements Processor{
 		String outputXML = xmlOut.outputString(xml);
 
 		exchange.getOut().setBody(outputXML);
+		PurchaseItems purchaseItems = PurchaseItems.getInstance();
+		String value = xml.getRootElement().getChild("tns:orders").getChild("tns:order").getChild("tns:customerID").getValue();
+		purchaseItems.setUser(ExistUser.getInstance().getbyID(value));
 
 		logger.info("out"+outputXML);
 		logger.info("outXML2"+xml);
