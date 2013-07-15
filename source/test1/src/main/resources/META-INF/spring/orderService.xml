@@ -14,32 +14,36 @@
 	<bean id="postProcessor" class="de.hszg.xml.fuse.routeHelper.PostXMLProcessor" />
 
 	<bean id="handler1XMLProcessor" class="de.hszg.xml.fuse.routeHelper.Handler1XMLProcessor" />
+		<bean id="handler2XMLProcessor" class="de.hszg.xml.fuse.routeHelper.Handler2XMLProcessor" />
+	
 
-	<camelContext xmlns="http://camel.apache.org/schema/spring"
-		trace="false">
-		<route>
-			<from uri="cxf:bean:order?dataFormat=POJO" />
-			<convertBodyTo type="String" />
-			<camel:process ref="processor" />
-			<log message="get: ${body}" />
-			<split>
-				<xpath>tns:orders/tns:order</xpath>
-				<log message="xpath: ${body}" />
-
-				<choice>
-					<when>
-						<xpath>tns:order/tns:provider = 'handler1'</xpath>
-						<camel:process ref="handler1XMLProcessor" />
-						<log message="handler1" />
-					</when>
-					<camel:otherwise>
-						<log message="handler2" />
-					</camel:otherwise>
-				</choice>
-			</split>
-			<camel:process ref="postProcessor" />
-
-		</route>
-	</camelContext>
+	<camelContext trace="false" xmlns="http://camel.apache.org/schema/spring">
+    <route>
+        <from uri="cxf:bean:order?dataFormat=POJO"/>
+        <convertBodyTo type="String"/>
+        <process ref="processor"/>
+        <log message="get: ${body}"/>
+        <split>
+            <xpath>tns:orders/tns:order</xpath>
+            <log message="xpath: ${body}"/>
+            <choice>
+                <when>
+                    <xpath>tns:order/tns:provider = 'handler1'</xpath>
+                    <process ref="handler1XMLProcessor"/>
+                    <log message="handler1"/>
+                </when>
+                <when>
+                    <xpath>tns:order/tns:provider = 'handler2'</xpath>
+                    <process ref="handler2XMLProcessor"/>
+                    <log message="handler2"/>
+                </when>
+                <otherwise>
+                    <log message="fail"/>
+                </otherwise>
+            </choice>
+        </split>
+        <process ref="postProcessor"/>
+    </route>
+</camelContext>
 
 </beans>
