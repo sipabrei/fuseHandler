@@ -27,6 +27,10 @@ public class PostXMLProcessor implements Processor {
 		for(PurchaseItem item : handler1){
 			logger.info(item.getId()+" "+item.getCount());
 		}
+		
+		OrderBuilderHandler1 handler1Builder = new OrderBuilderHandler1(instance.getUser().getId());
+		String request = handler1Builder.build(handler1);
+		
 		handler1 = instance.getHandler2();
 		logger.info("handler2");
 		for(PurchaseItem item : handler1){
