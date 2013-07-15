@@ -22,13 +22,14 @@ public class PostXMLProcessor implements Processor {
 	public void process(Exchange exchange) throws Exception {
 		PurchaseItems instance = PurchaseItems.getInstance();
 		List<PurchaseItem> handler1 = instance.getHandler1();
+		logger.info("user:"+instance.getUser().getId());
+		logger.info("handler1");
 		for(PurchaseItem item : handler1){
-			logger.info("handler1");
 			logger.info(item.getId()+" "+item.getCount());
 		}
 		handler1 = instance.getHandler2();
+		logger.info("handler2");
 		for(PurchaseItem item : handler1){
-			logger.info("handler2");
 			logger.info(item.getId()+" "+item.getCount());
 		}
 

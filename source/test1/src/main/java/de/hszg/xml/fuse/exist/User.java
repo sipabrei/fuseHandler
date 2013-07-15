@@ -6,6 +6,7 @@ public class User {
 	private String address;
 	private String city;
 	private String zipcode;
+	private String id;
 	public String getLastname() {
 		return lastname;
 	}
@@ -35,6 +36,12 @@ public class User {
 	}
 	public void setZipcode(String zipcode) {
 		this.zipcode = zipcode;
+	}
+	public String getId() {
+		return id;
+	}
+	public void setId(String id) {
+		this.id = id;
 	}
 
 }

@@ -21,6 +21,7 @@ public class ExistUser {
 		user.setFirstname("max");
 		user.setLastname("mustermann");
 		user.setZipcode("02826");
+		user.setId(id);
 		return user;
 	}
 	

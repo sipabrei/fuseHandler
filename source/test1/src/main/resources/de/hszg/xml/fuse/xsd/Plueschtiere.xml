@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<product xmlns:tns="http://www.example.org/MainProductSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="Plueschtiere.xsd">
+  <name>name</name>
+  <provider>provider</provider>
+  <supplier>supplier</supplier>
+  <product-supplier-id>product-supplier-id</product-supplier-id>
+  <description>description</description>
+  <group/>
+  <price>price</price>
+  <image>http://tempuri.org</image>
+  <color>color</color>
+  <gender>gender</gender>
+  <size>size</size>
+  <species>species</species>
+  <target-group>target-group</target-group>
+</product>

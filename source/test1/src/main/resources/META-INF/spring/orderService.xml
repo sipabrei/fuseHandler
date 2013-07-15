@@ -28,7 +28,7 @@
 
 				<choice>
 					<when>
-						<xpath>//tns:provider = 'handler1'</xpath>
+						<xpath>tns:order/tns:provider = 'handler1'</xpath>
 						<camel:process ref="handler1XMLProcessor" />
 						<log message="handler1" />
 					</when>

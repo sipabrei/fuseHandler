@@ -9,6 +9,7 @@ import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import org.jdom.Document;
 import org.jdom.JDOMException;
+import org.jdom.Namespace;
 import org.jdom.input.SAXBuilder;
 import org.jdom.output.Format;
 import org.jdom.output.XMLOutputter;
@@ -25,8 +26,6 @@ public class XMLOrderProcessor implements Processor{
 		Document xml = null;
 		
 		SAXBuilder builder = new SAXBuilder();
-		
-		logger.info("in"+exchange.getIn().getBody(String.class));
 		try {
 			xml = builder.build(new StringReader(exchange.getIn().getBody(String.class)));
 		} catch (IOException e) {
@@ -43,14 +42,11 @@ public class XMLOrderProcessor implements Processor{
 		XMLOutputter xmlOut = new XMLOutputter(Format.getPrettyFormat());
 
 		String outputXML = xmlOut.outputString(xml);
-
+		Namespace namespace = Namespace.getNamespace("tns", "http://www.example.org/OrderRequestSchema");
 		exchange.getOut().setBody(outputXML);
 		PurchaseItems purchaseItems = PurchaseItems.getInstance();
-		String value = xml.getRootElement().getChild("tns:orders").getChild("tns:order").getChild("tns:customerID").getValue();
+		String value = xml.getRootElement().getChild("order", namespace).getChild("customerID",namespace).getValue();
 		purchaseItems.setUser(ExistUser.getInstance().getbyID(value));
-
-		logger.info("out"+outputXML);
-		logger.info("outXML2"+xml);
 		
 	}
 
