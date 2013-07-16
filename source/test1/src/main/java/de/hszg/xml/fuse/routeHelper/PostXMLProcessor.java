@@ -38,7 +38,7 @@ public class PostXMLProcessor implements Processor {
 		logger.info("handler2");
 		for(PurchaseItem item : handler2){
 			logger.info(item.getId()+" "+item.getCount());
-			orderListHandler2 += "/Kaufer1/"+item.getId()+"/"+item.getCount();
+			orderListHandler2 += "/kaeufer1/"+item.getId()+"/"+item.getCount();
 		}		
 		exchange.getOut().setHeader("handler2Order", orderListHandler2);
 	}
