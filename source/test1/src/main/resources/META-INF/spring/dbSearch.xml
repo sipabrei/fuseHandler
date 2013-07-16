@@ -53,7 +53,7 @@
 				<!-- <setBody>
 					<simple>&lt;req:requestTyp&gt;objectname&lt;/req:requestTyp&gt;
         &lt;req:requestContent&gt;
-          &lt;!--You have a CHOICE of the next 2 items at this level--&gt;
+          &lt;!You have a CHOICE of the next 2 items at this level&gt;
           &lt;req:payment&gt;
             &lt;req:personality&gt;
               &lt;req:firstname&gt;?string?&lt;/req:firstname&gt;
@@ -69,7 +69,7 @@
             &lt;req:objects&gt;?string?&lt;/req:objects&gt;
           &lt;/req:payment&gt;
           &lt;req:search&gt;
-            &lt;!--You have a CHOICE of the next 3 items at this level--&gt;
+            &lt;!You have a CHOICE of the next 3 items at this level&gt;
             &lt;req:mainGroup&gt;?string?&lt;/req:mainGroup&gt;
             &lt;req:subGroup&gt;?string?&lt;/req:subGroup&gt;
             &lt;req:objectName&gt;barbie_2&lt;/req:objectName&gt;
