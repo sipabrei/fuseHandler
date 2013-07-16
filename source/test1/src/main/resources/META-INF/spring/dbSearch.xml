@@ -40,11 +40,14 @@
 
 		<route>
 			<from uri="direct:dbSearchHandler1" />
-			<setBody>
+			<!-- <setBody>
 				<simple>SELECT id FROM products WHERE subgroup = '${header.term}';</simple>
+			</setBody>-->
+			<setBody>
+			<simple>[[id=barbi_1,id=barbi_2]]</simple>
 			</setBody>
 			<log loggingLevel="DEBUG" message="entry: ${body}" />
-			<to uri="jdbc:dataSource" />
+			<!-- <to uri="jdbc:dataSource" />-->
 			<log loggingLevel="DEBUG" message="entry: ${body}" />
 			<split strategyRef="productAggregator">
 				<camel:method bean="SQLSplitter" method="splitBody" />
