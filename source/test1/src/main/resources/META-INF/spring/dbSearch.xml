@@ -44,7 +44,7 @@
 				<simple>SELECT id FROM products WHERE subgroup = '${header.term}';</simple>
 			</setBody>-->
 			<setBody>
-			<simple>[[id=barbi_1,id=barbi_2]]</simple>
+			<simple>[[id=barbie_1,id=barbie_2]]</simple>
 			</setBody>
 			<log loggingLevel="DEBUG" message="entry: ${body}" />
 			<!-- <to uri="jdbc:dataSource" />-->
