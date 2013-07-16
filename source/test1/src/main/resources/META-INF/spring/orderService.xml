@@ -14,42 +14,59 @@
 	<bean id="postProcessor" class="de.hszg.xml.fuse.routeHelper.PostXMLProcessor" />
 
 	<bean id="handler1XMLProcessor" class="de.hszg.xml.fuse.routeHelper.Handler1XMLProcessor" />
-		<bean id="handler2XMLProcessor" class="de.hszg.xml.fuse.routeHelper.Handler2XMLProcessor" />
-	
+	<bean id="handler2XMLProcessor" class="de.hszg.xml.fuse.routeHelper.Handler2XMLProcessor" />
 
-	<camelContext trace="false" xmlns="http://camel.apache.org/schema/spring">
-    <route>
-        <from uri="cxf:bean:order?dataFormat=POJO"/>
-        <convertBodyTo type="String"/>
-        <process ref="processor"/>
-        <log message="get: ${body}"/>
-        <split>
-            <xpath>tns:orders/tns:order</xpath>
-            <log message="xpath: ${body}"/>
-            <choice>
-                <when>
-                    <xpath>tns:order/tns:provider = 'handler1'</xpath>
-                    <process ref="handler1XMLProcessor"/>
-                    <log message="handler1"/>
-                </when>
-                <when>
-                    <xpath>tns:order/tns:provider = 'handler2'</xpath>
-                    <process ref="handler2XMLProcessor"/>
-                    <log message="handler2"/>
-                </when>
-                <otherwise>
-                    <log message="fail"/>
-                </otherwise>
-            </choice>
-        </split>
-        
-        <setBody>
-        <simple>${header.handler1Order}</simple>
-        </setBody>
-        <!-- Webservice request to xml handler -->
-        
-        <process ref="postProcessor"/>
-    </route>
-</camelContext>
+
+	<camelContext trace="false"
+		xmlns="http://camel.apache.org/schema/spring">
+		<route>
+			<from uri="cxf:bean:order?dataFormat=POJO" />
+			<convertBodyTo type="String" />
+			<process ref="processor" />
+			<log message="get: ${body}" />
+			<split>
+				<xpath>tns:orders/tns:order</xpath>
+				<log message="xpath: ${body}" />
+				<choice>
+					<when>
+						<xpath>tns:order/tns:provider = 'handler1'</xpath>
+						<process ref="handler1XMLProcessor" />
+						<log message="handler1" />
+					</when>
+					<when>
+						<xpath>tns:order/tns:provider = 'handler2'</xpath>
+						<process ref="handler2XMLProcessor" />
+						<log message="handler2" />
+					</when>
+					<otherwise>
+						<log message="fail" />
+					</otherwise>
+				</choice>
+			</split>
+			<process ref="postProcessor" />
+			<setBody>
+				<simple>${header.handler1Order}</simple>
+			</setBody>
+			<log message="BodyMessageSent: ${body}" />
+			<!-- Webservice request to xml handler -->
+			<split>
+				<tokenize token=";" />
+				<setBody>
+					<simple>
+					${header.handler2Order}
+					</simple>
+				</setBody>
+				<log message="BodyMessageSent: ${body}" />
+				<setHeader headerName="CamelHttpMethod">
+					<constant>GET</constant>
+				</setHeader>
+				<setHeader headerName="CamelHttpUri">
+					<simple>http://193.174.103.84:8088/order/${body}</simple>
+				</setHeader>
+				<to uri="http://nichtRelevant" />
+			</split>
+
+		</route>
+	</camelContext>
 
 </beans>

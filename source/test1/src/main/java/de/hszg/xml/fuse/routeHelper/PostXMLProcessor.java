@@ -22,6 +22,8 @@ public class PostXMLProcessor implements Processor {
 	public void process(Exchange exchange) throws Exception {
 		PurchaseItems instance = PurchaseItems.getInstance();
 		List<PurchaseItem> handler1 = instance.getHandler1();
+		List<PurchaseItem> handler2 = instance.getHandler2();
+		String orderListHandler2 = "";		
 		logger.info("user:"+instance.getUser().getId());
 		logger.info("handler1");
 		for(PurchaseItem item : handler1){
@@ -33,14 +35,12 @@ public class PostXMLProcessor implements Processor {
 		
 		exchange.getOut().setHeader("handler1Order", requestHandler1);
 		
-		handler1 = instance.getHandler2();
 		logger.info("handler2");
-		for(PurchaseItem item : handler1){
+		for(PurchaseItem item : handler2){
 			logger.info(item.getId()+" "+item.getCount());
-		}
-
-		
-
+			orderListHandler2 += "/Kaufer1/"+item.getId()+"/"+item.getCount();
+		}		
+		exchange.getOut().setHeader("handler2Order", orderListHandler2);
 	}
 
 }
