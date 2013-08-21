@@ -25,7 +25,7 @@ http://camel.apache.org/schema/cxf http://camel.apache.org/schema/cxf/camel-cxf.
 		serviceClass="de.mariospitze.fuse.tests.test1.SearchRequest" />
 
 	<import resource="dbSearch.xml" />
-	<import resource="Handler1Test11.xml" />
+	<import resource="Handler1Transform.xml" />
 
 	<camelContext trace="false"
 		xmlns="http://camel.apache.org/schema/spring">

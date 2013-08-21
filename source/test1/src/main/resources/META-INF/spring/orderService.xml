@@ -48,6 +48,13 @@
 				<simple>${header.handler1Order}</simple>
 			</setBody>
 			<log message="BodyMessageSent: ${body}" />
+			<setHeader headerName="CamelHttpMethod">
+				<constant>GET</constant>
+			</setHeader>
+			<setHeader headerName="CamelHttpUri">
+				<simple>http://141.46.192.108:9080/Trader2EndpointService/Trader2EndpointPort/${body}</simple>
+			</setHeader>
+			<to uri="http://nichtRelevant" />
 			<!-- Webservice request to xml handler -->
 			<split>
 				<tokenize token=";" />
